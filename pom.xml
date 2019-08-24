@@ -11,7 +11,7 @@
     </parent>
     <groupId>org.openwms</groupId>
     <artifactId>org.openwms.parent</artifactId>
-    <version>8</version>
+    <version>9</version>
     <packaging>pom</packaging>
     <name>OpenWMS.org Parent Project</name>
     <description>OpenWMS.org is an open source warehouse management software</description>
@@ -44,16 +44,16 @@
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
         <site>
-            <id>ftp-io</id>
+            <id>site</id>
             <name>OpenWMS.org WebSite</name>
-            <url>scp://ftp.interface21.io/docs/org.openwms</url>
+            <url>scm:git:git@github.com:openwms/org.openwms.git</url>
         </site>
     </distributionManagement>
 
     <scm>
         <url>https://github.com/openwms/org.openwms</url>
-        <connection>scm:git:git://github.com/openwms/org.openwms.git</connection>
-        <developerConnection>scm:git:git@github.com:openwms/org.openwms.git</developerConnection>
+        <connection>scm:git:https://github.com/openwms/org.openwms.git</connection>
+        <developerConnection>scm:git:https://github.com:openwms/org.openwms.git</developerConnection>
     </scm>
 
     <organization>
@@ -191,6 +191,20 @@
     </ciManagement>
 
     <profiles>
+        <profile>
+            <id>sonar</id>
+            <properties>
+                <debug.info>false</debug.info>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
         <profile>
             <id>release</id>
             <properties>
@@ -335,10 +349,12 @@
         <maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
         <maven-project-info-reports-plugin.version>3.0.0</maven-project-info-reports-plugin.version>
         <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
+        <maven-scm-publish-plugin.version>1.1</maven-scm-publish-plugin.version>
         <maven-site-plugin.version>3.7.1</maven-site-plugin.version>
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
         <maven-surefire-plugin.version>3.0.0-M3</maven-surefire-plugin.version>
         <maven-surefire-report-plugin.version>3.0.0-M3</maven-surefire-report-plugin.version>
+        <surefire-junit47.version>3.0.0-M3</surefire-junit47.version>
         <wagon-ssh.version>3.3.2</wagon-ssh.version>
         <wagon-ftp.version>3.3.2</wagon-ftp.version>
     </properties>
@@ -352,7 +368,7 @@
                     <reportSet>
                         <inherited>true</inherited>
                         <reports>
-                            <report>aggregate</report>
+                            <report>javadoc</report>
                         </reports>
                         <configuration>
                             <aggregate>true</aggregate>
@@ -379,7 +395,7 @@
                 <artifactId>maven-surefire-report-plugin</artifactId>
                 <version>${maven-surefire-report-plugin.version}</version>
                 <configuration>
-                    <aggregate>true</aggregate>
+                    <aggregate>false</aggregate>
                 </configuration>
             </plugin>
             <plugin>
@@ -390,23 +406,26 @@
                         <inherited>false</inherited>
                         <reports>
                             <report>index</report>
-                            <report>scm</report>
-                            <report>plugin-management</report>
-                            <report>plugins</report>
                             <report>summary</report>
+                            <report>team</report>
+                            <report>issue-management</report>
+                            <report>ci-management</report>
+                            <report>scm</report>
                             <report>dependencies</report>
                             <report>dependency-convergence</report>
                             <report>dependency-management</report>
+                            <report>plugin-management</report>
+                            <report>plugins</report>
                         </reports>
                     </reportSet>
                     <reportSet>
                         <inherited>false</inherited>
                         <reports>
-                            <report>project-team</report>
-                            <report>issue-tracking</report>
-                            <report>license</report>
-                            <report>mailing-list</report>
-                            <report>cim</report>
+                            <report>team</report>
+                            <report>issue-management</report>
+                            <report>licenses</report>
+                            <report>mailing-lists</report>
+                            <report>ci-management</report>
                         </reports>
                     </reportSet>
                 </reportSets>
@@ -645,17 +664,24 @@
                             <include>**/*IT.java</include>
                             <include>**/*Documentation.java</include>
                         </includes>
-                        <threadCount>1</threadCount>
                         <trimStackTrace>true</trimStackTrace> <!-- default: true -->
                         <useSystemClassLoader>true</useSystemClassLoader> <!-- default: true -->
                     </configuration>
                     <dependencies>
                         <dependency>
-                            <groupId>org.apache.maven.surefire</groupId>
-                            <artifactId>surefire-junit47</artifactId>
-                            <version>${maven-surefire-plugin.version}</version>
+                            <groupId>org.junit.platform</groupId>
+                            <artifactId>junit-platform-surefire-provider</artifactId>
+                            <version>${junit-platform.version}</version>
                         </dependency>
                     </dependencies>
+                </plugin>
+
+                <plugin>
+                    <artifactId>maven-scm-publish-plugin</artifactId>
+                    <version>${maven-scm-publish-plugin.version}</version>
+                    <configuration>
+                        <scmBranch>gh-pages</scmBranch>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -763,7 +789,7 @@
             <dependency>
                 <groupId>org.apache.maven.surefire</groupId>
                 <artifactId>surefire-junit47</artifactId>
-                <version>${maven-surefire-plugin.version}</version>
+                <version>${surefire-junit47.version}</version>
             </dependency>
 
             <dependency>
