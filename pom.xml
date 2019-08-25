@@ -320,7 +320,7 @@
         <surefireArgs>-Dspring.profiles.active=TEST</surefireArgs>
 
         <!-- Dependency versions -->
-        <ameba-lib.version>2.1-SNAPSHOT</ameba-lib.version>
+        <ameba-lib.version>2.1</ameba-lib.version>
         <archunit.version>0.11.0</archunit.version>
         <aspectj.version>1.8.14</aspectj.version> <!-- Keep in sync with boot -->
         <dozer.version>5.5.1</dozer.version>
