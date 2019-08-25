@@ -11,7 +11,7 @@
     </parent>
     <groupId>org.openwms</groupId>
     <artifactId>org.openwms.parent</artifactId>
-    <version>9</version>
+    <version>10</version>
     <packaging>pom</packaging>
     <name>OpenWMS.org Parent Project</name>
     <description>OpenWMS.org is an open source warehouse management software</description>
