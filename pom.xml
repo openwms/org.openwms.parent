@@ -11,7 +11,7 @@
     </parent>
     <groupId>org.openwms</groupId>
     <artifactId>org.openwms.parent</artifactId>
-    <version>10</version>
+    <version>12</version>
     <packaging>pom</packaging>
     <name>OpenWMS.org Parent Project</name>
     <description>OpenWMS.org is an open source warehouse management software</description>
@@ -292,6 +292,81 @@
                 </plugins>
             </build>
         </profile>
+        <profile>
+            <id>schemagen</id>
+            <!-- Used to create an ERD schema diagram -->
+            <properties>
+                <schemaspy-maven-plugin.version>5.1.0</schemaspy-maven-plugin.version>
+                <M2_REPO_DIR>/home/travis/.m2/repository</M2_REPO_DIR>
+                <SCHEMA>public</SCHEMA>
+                <DB_USERNAME>karl</DB_USERNAME>
+                <DB_PASSWORD>karl</DB_PASSWORD>
+            </properties>
+            <reporting>
+                <plugins>
+                    <plugin>
+                        <groupId>nl.geodienstencentrum.maven</groupId>
+                        <artifactId>schemaspy-maven-plugin</artifactId>
+                        <configuration>
+                            <databaseType>pgsql</databaseType>
+                            <database>testdb</database>
+                            <host>localhost</host>
+                            <port>5432</port>
+                            <user>${DB_USERNAME}</user>
+                            <schema>${SCHEMA}</schema>
+                            <password>${DB_PASSWORD}</password>
+                            <pathToDrivers>${M2_REPO_DIR}/org/postgresql/postgresql/${postgresql.version}/postgresql-${postgresql.version}.jar</pathToDrivers>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </reporting>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <artifactId>maven-surefire-report-plugin</artifactId>
+                            <version>${maven-surefire-report-plugin.version}</version>
+                            <configuration>
+                                <aggregate>false</aggregate>
+                            </configuration>
+                            <dependencies>
+                                <dependency>
+                                    <groupId>org.postgresql</groupId>
+                                    <artifactId>postgresql</artifactId>
+                                    <version>${postgresql.version}</version>
+                                </dependency>
+                            </dependencies>
+                        </plugin>
+                        <plugin>
+                            <groupId>nl.geodienstencentrum.maven</groupId>
+                            <artifactId>schemaspy-maven-plugin</artifactId>
+                            <version>${schemaspy-maven-plugin.version}</version>
+                            <dependencies>
+                                <dependency>
+                                    <groupId>org.postgresql</groupId>
+                                    <artifactId>postgresql</artifactId>
+                                    <version>${postgresql.version}</version>
+                                </dependency>
+                            </dependencies>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+                <plugins>
+                    <plugin>
+                        <groupId>nl.geodienstencentrum.maven</groupId>
+                        <artifactId>schemaspy-maven-plugin</artifactId>
+                        <version>${schemaspy-maven-plugin.version}</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.postgresql</groupId>
+                                <artifactId>postgresql</artifactId>
+                                <version>${postgresql.version}</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 
     <properties>
@@ -315,6 +390,7 @@
         <reportOutputDirectory>${project.reporting.outputDirectory}/apidocs/${project.version}</reportOutputDirectory> <!-- Javadoc plugin config -->
         <scmpublish.content>${project.build.directory}/site</scmpublish.content>
         <scmuser></scmuser>
+        <skipTests>false</skipTests>
         <snippetsDirectory>${documentation.snippet.dir}</snippetsDirectory>
         <surefireArgs>-Dspring.profiles.active=TEST</surefireArgs>
 
@@ -325,6 +401,7 @@
         <aspectj.version>1.9.4</aspectj.version> <!-- Keep in sync with boot -->
         <dozer.version>5.5.1</dozer.version>
         <feign-httpclient.version>9.7.0</feign-httpclient.version>
+        <junit-platform.version>1.3.1</junit-platform.version>
         <guava.version>19.0</guava.version>
         <hystrix-javanica.version>1.5.12</hystrix-javanica.version>
         <logstash-logback-encoder.version>5.3</logstash-logback-encoder.version>
@@ -565,6 +642,7 @@
                                     <bnumber>${ci.buildNumber}</bnumber>
                                     <generated>${documentation.snippet.dir}</generated>
                                 </attributes>
+                                <skip>${skipTests}</skip>
                             </configuration>
                         </execution>
                         <execution>
@@ -581,6 +659,7 @@
                                     <bnumber>${ci.buildNumber}</bnumber>
                                     <generated>${documentation.snippet.dir}</generated>
                                 </attributes>
+                                <skip>${skipTests}</skip>
                             </configuration>
                         </execution>
                     </executions>
