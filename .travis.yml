@@ -1,24 +1,12 @@
 language: java
 
 jdk:
-  - openjdk8
+  - openjdk11
 
-node_js:
-  - '0.8'
-  - '0.10'
-
-install: true
-
-before_script:
-  - npm install -g bower
-
-addons:
-  sonarcloud:
-    organization: "openwms-github"
+install: false
 
 script:
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar --settings=./etc/ci/settings.xml -Prelease,travis -U -Dci.buildNumber=$TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER -Ddocumentation.dir=$TRAVIS_BUILD_DIR
-  - sonar-scanner
+  - mvn clean install --settings=./etc/ci/settings.xml -Prelease,travis -U -B -Dci.buildNumber=$TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER -Ddocumentation.dir=$TRAVIS_BUILD_DIR
 
 env:
   global:
