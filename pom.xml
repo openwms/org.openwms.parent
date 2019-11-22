@@ -11,7 +11,7 @@
     </parent>
     <groupId>org.openwms</groupId>
     <artifactId>org.openwms.parent</artifactId>
-    <version>13</version>
+    <version>14</version>
     <packaging>pom</packaging>
     <name>OpenWMS.org Parent Project</name>
     <description>OpenWMS.org is an open source warehouse management software</description>
@@ -394,7 +394,7 @@
         <surefireArgs>-Dspring.profiles.active=TEST</surefireArgs>
 
         <!-- Dependency versions -->
-        <ameba-lib.version>2.3-SNAPSHOT</ameba-lib.version>
+        <ameba-lib.version>2.3</ameba-lib.version>
         <apiguardian-api.version>1.1.0</apiguardian-api.version>
         <archunit.version>0.12.0</archunit.version>
         <aspectj.version>1.9.4</aspectj.version> <!-- Keep in sync with boot -->
