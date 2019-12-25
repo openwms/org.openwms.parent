@@ -11,7 +11,7 @@
     </parent>
     <groupId>org.openwms</groupId>
     <artifactId>org.openwms.parent</artifactId>
-    <version>14</version>
+    <version>15</version>
     <packaging>pom</packaging>
     <name>OpenWMS.org Parent Project</name>
     <description>OpenWMS.org is an open source warehouse management software</description>
@@ -297,6 +297,7 @@
             <!-- Used to create an ERD schema diagram -->
             <properties>
                 <schemaspy-maven-plugin.version>5.1.0</schemaspy-maven-plugin.version>
+                <schemagen.outputDirectory>${project.build.directory}/site</schemagen.outputDirectory>
                 <M2_REPO_DIR>/home/travis/.m2/repository</M2_REPO_DIR>
                 <SCHEMA>public</SCHEMA>
                 <DB_USERNAME>KARL</DB_USERNAME>
@@ -314,6 +315,7 @@
                             <port>5432</port>
                             <user>${DB_USERNAME}</user>
                             <schema>${SCHEMA}</schema>
+                            <outputDirectory>${schemagen.outputDirectory}</outputDirectory>
                             <password>${DB_PASSWORD}</password>
                             <pathToDrivers>${M2_REPO_DIR}/org/postgresql/postgresql/${postgresql.version}/postgresql-${postgresql.version}.jar</pathToDrivers>
                         </configuration>
@@ -386,7 +388,7 @@
         <documentation.snippet.dir>${documentation.dir}/generated-snippets</documentation.snippet.dir>
         <documentation.input.dir>${documentation.dir}/generated-docs</documentation.input.dir>
         <documentation.output.dir>${documentation.dir}/site/rest/${project.version}</documentation.output.dir>
-        <reportOutputDirectory>${project.reporting.outputDirectory}/apidocs/${project.version}</reportOutputDirectory> <!-- Javadoc plugin config -->
+        <javadoc.output.dir>${project.reporting.outputDirectory}/apidocs/${project.version}</javadoc.output.dir> <!-- Javadoc plugin config -->
         <scmpublish.content>${project.build.directory}/site</scmpublish.content>
         <scmuser></scmuser>
         <skipTests>false</skipTests>
@@ -416,6 +418,7 @@
         <asciidoctor-maven-plugin.version>1.6.0</asciidoctor-maven-plugin.version>
         <aspectj-maven-plugin.version>1.12.9</aspectj-maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
+        <jib-maven-plugin.version>1.8.0</jib-maven-plugin.version>
         <git-commit-id-plugin.version>3.0.1</git-commit-id-plugin.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version> <!-- Keep in sync with boot -->
         <maven-enforcer-plugin.version>3.0.0-M2</maven-enforcer-plugin.version> <!-- Keep in sync with boot -->
@@ -427,9 +430,9 @@
         <maven-scm-publish-plugin.version>3.0.0</maven-scm-publish-plugin.version>
         <maven-site-plugin.version>3.8.2</maven-site-plugin.version> <!-- Keep in sync with boot -->
         <maven-source-plugin.version>3.1.0</maven-source-plugin.version> <!-- Keep in sync with boot -->
-        <maven-surefire-plugin.version>3.0.0-M3</maven-surefire-plugin.version> <!-- Keep in sync with boot -->
-        <maven-surefire-report-plugin.version>3.0.0-M3</maven-surefire-report-plugin.version>
-        <surefire-junit47.version>3.0.0-M3</surefire-junit47.version>
+        <maven-surefire-plugin.version>3.0.0-M4</maven-surefire-plugin.version> <!-- Keep in sync with boot -->
+        <maven-surefire-report-plugin.version>3.0.0-M4</maven-surefire-report-plugin.version>
+        <surefire-junit47.version>3.0.0-M4</surefire-junit47.version>
         <wagon-ssh.version>3.3.4</wagon-ssh.version>
         <wagon-ftp.version>3.3.4</wagon-ftp.version>
         <versions-maven-plugin.version>2.5</versions-maven-plugin.version>
@@ -455,6 +458,7 @@
                             <keywords>true</keywords>
                             <linksource>false</linksource>
                             <quiet>true</quiet>
+                            <reportOutputDirectory>${javadoc.output.dir}</reportOutputDirectory>
                             <show>private</show>
                             <source>${java.version}</source>
                             <tags>
@@ -533,8 +537,25 @@
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <artifactId>maven-site-plugin</artifactId>
-                    <version>${maven-site-plugin.version}</version>
+                    <groupId>com.google.cloud.tools</groupId>
+                    <artifactId>jib-maven-plugin</artifactId>
+                    <version>${jib-maven-plugin.version}</version>
+                    <configuration>
+                        <from>
+                            <image>azul/zulu-openjdk-alpine:11-jre</image>
+                        </from>
+                        <to>
+                            <image>docker.io/openwms/${project.artifactId}:latest</image>
+                        </to>
+                        <container>
+                            <jvmFlags>
+                                <jvmFlag>-noverify</jvmFlag>
+                                <jvmFlag>-XX:+UseSerialGC</jvmFlag>
+                                <jvmFlag>-Xss512k</jvmFlag>
+                            </jvmFlags>
+                            <useCurrentTimestamp>true</useCurrentTimestamp>
+                        </container>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
@@ -547,25 +568,7 @@
                         <release>11</release>
                     </configuration>
                 </plugin>
-
                 <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                    <version>${spring-boot.version}</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>repackage</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <mainClass>${start-class}</mainClass>
-                    </configuration>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
                     <version>${maven-enforcer-plugin.version}</version>
                     <configuration>
@@ -580,7 +583,71 @@
                         </rules>
                     </configuration>
                 </plugin>
-
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven-resources-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>copy-resources</id>
+                            <phase>prepare-package</phase>
+                            <goals>
+                                <goal>copy-resources</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>${documentation.output.dir}</outputDirectory>
+                                <resources>
+                                    <resource>
+                                        <directory>${documentation.input.dir}</directory>
+                                    </resource>
+                                </resources>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>copy-asciidoc</id>
+                            <phase>pre-site</phase>
+                            <goals>
+                                <goal>copy-resources</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>${documentation.output.dir}</outputDirectory>
+                                <resources>
+                                    <resource>
+                                        <directory>${documentation.input.dir}</directory>
+                                    </resource>
+                                </resources>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-scm-publish-plugin</artifactId>
+                    <version>${maven-scm-publish-plugin.version}</version>
+                    <configuration>
+                        <scmBranch>gh-pages</scmBranch>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>${maven-site-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven-surefire-plugin.version}</version>
+                    <configuration>
+                        <!-- Never set a forkCount to 0 bc. of Jacoco -->
+                        <excludes>
+                            <exclude>**/Abstract*.java</exclude>
+                            <exclude>**/*Tests.java</exclude>
+                        </excludes>
+                        <includes>
+                            <include>**/*Test.java</include>
+                            <include>**/*IT.java</include>
+                            <include>**/*Documentation.java</include>
+                        </includes>
+                        <trimStackTrace>true</trimStackTrace> <!-- default: true -->
+                        <useSystemClassLoader>true</useSystemClassLoader> <!-- default: true -->
+                    </configuration>
+                </plugin>
                 <plugin>
                     <groupId>io.starter</groupId>
                     <artifactId>aspectj-maven-plugin</artifactId>
@@ -626,7 +693,11 @@
                         </dependency>
                     </dependencies>
                 </plugin>
-
+                <plugin>
+                    <groupId>pl.project13.maven</groupId>
+                    <artifactId>git-commit-id-plugin</artifactId>
+                    <version>${git-commit-id-plugin.version}</version>
+                </plugin>
                 <plugin>
                     <groupId>org.asciidoctor</groupId>
                     <artifactId>asciidoctor-maven-plugin</artifactId>
@@ -668,7 +739,6 @@
                         </execution>
                     </executions>
                 </plugin>
-
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
@@ -688,74 +758,19 @@
                         </execution>
                     </executions>
                 </plugin>
-
                 <plugin>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <version>${maven-resources-plugin.version}</version>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
                     <executions>
                         <execution>
-                            <id>copy-resources</id>
-                            <phase>prepare-package</phase>
                             <goals>
-                                <goal>copy-resources</goal>
+                                <goal>repackage</goal>
                             </goals>
-                            <configuration>
-                                <outputDirectory>${documentation.output.dir}</outputDirectory>
-                                <resources>
-                                    <resource>
-                                        <directory>${documentation.input.dir}</directory>
-                                    </resource>
-                                </resources>
-                            </configuration>
-                        </execution>
-                        <execution>
-                            <id>copy-asciidoc</id>
-                            <phase>pre-site</phase>
-                            <goals>
-                                <goal>copy-resources</goal>
-                            </goals>
-                            <configuration>
-                                <outputDirectory>${documentation.output.dir}</outputDirectory>
-                                <resources>
-                                    <resource>
-                                        <directory>${documentation.input.dir}</directory>
-                                    </resource>
-                                </resources>
-                            </configuration>
                         </execution>
                     </executions>
-                </plugin>
-
-                <plugin>
-                    <groupId>pl.project13.maven</groupId>
-                    <artifactId>git-commit-id-plugin</artifactId>
-                    <version>${git-commit-id-plugin.version}</version>
-                </plugin>
-
-                <plugin>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>${maven-surefire-plugin.version}</version>
                     <configuration>
-                        <!-- Never set a forkCount to 0 bc. of Jacoco -->
-                        <excludes>
-                            <exclude>**/Abstract*.java</exclude>
-                            <exclude>**/*Tests.java</exclude>
-                        </excludes>
-                        <includes>
-                            <include>**/*Test.java</include>
-                            <include>**/*IT.java</include>
-                            <include>**/*Documentation.java</include>
-                        </includes>
-                        <trimStackTrace>true</trimStackTrace> <!-- default: true -->
-                        <useSystemClassLoader>true</useSystemClassLoader> <!-- default: true -->
-                    </configuration>
-                </plugin>
-
-                <plugin>
-                    <artifactId>maven-scm-publish-plugin</artifactId>
-                    <version>${maven-scm-publish-plugin.version}</version>
-                    <configuration>
-                        <scmBranch>gh-pages</scmBranch>
+                        <mainClass>${start-class}</mainClass>
                     </configuration>
                 </plugin>
                 <plugin>
