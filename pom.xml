@@ -423,8 +423,8 @@
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version> <!-- Keep in sync with boot -->
         <maven-enforcer-plugin.version>3.0.0-M2</maven-enforcer-plugin.version> <!-- Keep in sync with boot -->
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
-        <maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version> <!-- Keep in sync with boot -->
         <maven-jar-plugin.version>3.1.2</maven-jar-plugin.version> <!-- Keep in sync with boot -->
+        <maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version> <!-- Keep in sync with boot -->
         <maven-project-info-reports-plugin.version>3.0.0</maven-project-info-reports-plugin.version>
         <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version> <!-- Keep in sync with boot -->
         <maven-scm-publish-plugin.version>3.0.0</maven-scm-publish-plugin.version>
@@ -574,9 +574,7 @@
                     <configuration>
                         <rules>
                             <requireJavaVersion>
-                                <message>
-                                    At least a JDK in version ${java.version} is required.
-                                </message>
+                                <message>At least a JDK in version ${java.version} is required.</message>
                                 <version>${java.version}</version>
                             </requireJavaVersion>
                             <DependencyConvergence/>
@@ -644,8 +642,6 @@
                             <include>**/*IT.java</include>
                             <include>**/*Documentation.java</include>
                         </includes>
-                        <trimStackTrace>true</trimStackTrace> <!-- default: true -->
-                        <useSystemClassLoader>true</useSystemClassLoader> <!-- default: true -->
                     </configuration>
                 </plugin>
                 <plugin>
@@ -892,11 +888,6 @@
                 <version>${logstash-logback-encoder.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.springframework.data</groupId>
-                <artifactId>spring-data-envers</artifactId>
-                <version>${spring-data-envers.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-aspects</artifactId>
                 <version>${spring-framework.version}</version>
@@ -907,6 +898,11 @@
                 <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-envers</artifactId>
+                <version>${spring-data-envers.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.junit.platform</groupId>
