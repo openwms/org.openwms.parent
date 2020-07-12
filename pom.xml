@@ -11,7 +11,7 @@
     </parent>
     <groupId>org.openwms</groupId>
     <artifactId>org.openwms.parent</artifactId>
-    <version>16</version>
+    <version>17</version>
     <packaging>pom</packaging>
     <name>OpenWMS.org Parent Project</name>
     <description>OpenWMS.org is an open source warehouse management software</description>
@@ -311,11 +311,15 @@
             <!-- Used to create an ERD schema diagram -->
             <properties>
                 <schemaspy-maven-plugin.version>5.1.0</schemaspy-maven-plugin.version>
-                <schemagen.outputDirectory>${project.build.directory}/site</schemagen.outputDirectory>
+                <surefireArgs>-Dspring.profiles.active=ASYNCHRONOUS,TEST,TESTPG</surefireArgs>
+                <schemagen.outputDirectory>${project.build.directory}/site/${project.version}</schemagen.outputDirectory>
                 <M2_REPO_DIR>/home/travis/.m2/repository</M2_REPO_DIR>
                 <SCHEMA>public</SCHEMA>
                 <DB_USERNAME>KARL</DB_USERNAME>
                 <DB_PASSWORD>KARL</DB_PASSWORD>
+                <DB_HOST>localhost</DB_HOST>
+                <DB_PORT>5432</DB_PORT>
+                <DB_NAME>testdb</DB_NAME>
             </properties>
             <reporting>
                 <plugins>
@@ -324,9 +328,9 @@
                         <artifactId>schemaspy-maven-plugin</artifactId>
                         <configuration>
                             <databaseType>pgsql</databaseType>
-                            <database>testdb</database>
-                            <host>localhost</host>
-                            <port>5432</port>
+                            <database>${DB_NAME}</database>
+                            <host>${DB_HOST}</host>
+                            <port>${DB_PORT}</port>
                             <user>${DB_USERNAME}</user>
                             <schema>${SCHEMA}</schema>
                             <outputDirectory>${schemagen.outputDirectory}</outputDirectory>
