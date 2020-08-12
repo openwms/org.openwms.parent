@@ -416,7 +416,7 @@
         <surefireArgs>-Dspring.profiles.active=TEST</surefireArgs>
 
         <!-- Dependency versions -->
-        <ameba-lib.version>2.3</ameba-lib.version>
+        <ameba-lib.version>2.4</ameba-lib.version>
         <apiguardian-api.version>1.1.0</apiguardian-api.version>
         <archunit.version>0.14.1</archunit.version>
         <aspectj.version>1.9.5</aspectj.version> <!-- Keep in sync with boot -->
@@ -453,8 +453,8 @@
         <maven-surefire-report-plugin.version>3.0.0-M4</maven-surefire-report-plugin.version>
         <surefire-junit47.version>3.0.0-M5</surefire-junit47.version>
         <versions-maven-plugin.version>2.7</versions-maven-plugin.version> <!-- Keep in sync with boot -->
-        <wagon-ssh.version>3.4.1</wagon-ssh.version>
         <wagon-ftp.version>3.4.1</wagon-ftp.version>
+        <wagon-ssh.version>3.4.1</wagon-ssh.version>
     </properties>
 
     <reporting>
@@ -581,10 +581,11 @@
                     <version>${maven-compiler-plugin.version}</version>
                     <configuration>
                         <debug>${debug.info}</debug>
-                        <optimize>true</optimize>
-                        <fork>true</fork>
                         <encoding>${project.build.sourceEncoding}</encoding>
-                        <release>11</release>
+                        <fork>true</fork>
+                        <optimize>true</optimize>
+                        <parameters>true</parameters>
+                        <release>${java.version}</release>
                     </configuration>
                 </plugin>
                 <plugin>
