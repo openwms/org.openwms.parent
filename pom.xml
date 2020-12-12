@@ -11,7 +11,7 @@
     </parent>
     <groupId>org.openwms</groupId>
     <artifactId>org.openwms.parent</artifactId>
-    <version>18</version>
+    <version>19</version>
     <packaging>pom</packaging>
     <name>OpenWMS.org Parent Project</name>
     <description>OpenWMS.org is an open source warehouse management software</description>
@@ -420,6 +420,7 @@
         <apiguardian-api.version>1.1.0</apiguardian-api.version>
         <archunit.version>0.14.1</archunit.version>
         <aspectj.version>1.9.6</aspectj.version> <!-- Keep in sync with boot -->
+        <commons-collections.version>3.2.2</commons-collections.version> <!-- This is bound to Dozer / Eureka Client -->
         <dozer.version>5.5.1</dozer.version>
         <feign-httpclient.version>10.10.1</feign-httpclient.version> <!-- Keep in sync with spring-cloud-openfeign-dependencies -->
         <hystrix-javanica.version>1.5.18</hystrix-javanica.version> <!-- Keep in sync with spring-cloud-netflix-hystrix -->
@@ -427,10 +428,10 @@
         <logstash-logback-encoder.version>6.4</logstash-logback-encoder.version>
         <postgresql.version>42.2.18</postgresql.version> <!-- Keep in sync with Boot -->
 
-        <spring-boot.version>2.4.0</spring-boot.version>
-        <spring-data-envers.version>2.4.1</spring-data-envers.version>
+        <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
+        <spring-data-envers.version>2.3.6.RELEASE</spring-data-envers.version>
         <spring-restdocs-mockmvc.version>2.0.5.RELEASE</spring-restdocs-mockmvc.version>
-        <spring-framework.version>5.3.1</spring-framework.version> <!-- Keep in sync with boot -->
+        <spring-framework.version>5.2.12.RELEASE</spring-framework.version> <!-- Keep in sync with boot -->
         <start-class></start-class> <!-- keep it empty, set by actual boot module -->
 
         <!--   Plugin versions   -->
@@ -561,7 +562,7 @@
                     <version>${jib-maven-plugin.version}</version>
                     <configuration>
                         <from>
-                            <image>azul/zulu-openjdk-alpine:11-jre</image>
+                            <image>adoptopenjdk/openjdk11-openj9:jre-11.0.7_10_openj9-0.20.0-alpine</image>
                         </from>
                         <to>
                             <image>docker.io/openwms/${project.artifactId}:latest</image>
@@ -805,20 +806,14 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>io.interface21</groupId>
-                <artifactId>ameba-lib</artifactId>
-                <version>${ameba-lib.version}</version>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>${commons-collections.version}</version>
             </dependency>
             <dependency>
-                <groupId>io.interface21</groupId>
-                <artifactId>ameba-lib</artifactId>
-                <version>${ameba-lib.version}</version>
-                <type>test-jar</type>
-            </dependency>
-            <dependency>
-                <groupId>org.apiguardian</groupId>
-                <artifactId>apiguardian-api</artifactId>
-                <version>${apiguardian-api.version}</version>
+                <groupId>com.netflix.hystrix</groupId>
+                <artifactId>hystrix-javanica</artifactId>
+                <version>${hystrix-javanica.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.tngtech.archunit</groupId>
@@ -843,19 +838,25 @@
                 </exclusions>
             </dependency>
             <dependency>
-                <groupId>org.aspectj</groupId>
-                <artifactId>aspectjrt</artifactId>
-                <version>${aspectj.version}</version>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-httpclient</artifactId>
+                <version>${feign-httpclient.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.aspectj</groupId>
-                <artifactId>aspectjweaver</artifactId>
-                <version>${aspectj.version}</version>
+                <groupId>io.interface21</groupId>
+                <artifactId>ameba-lib</artifactId>
+                <version>${ameba-lib.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.aspectj</groupId>
-                <artifactId>aspectjtools</artifactId>
-                <version>${aspectj.version}</version>
+                <groupId>io.interface21</groupId>
+                <artifactId>ameba-lib</artifactId>
+                <version>${ameba-lib.version}</version>
+                <type>test-jar</type>
+            </dependency>
+            <dependency>
+                <groupId>net.logstash.logback</groupId>
+                <artifactId>logstash-logback-encoder</artifactId>
+                <version>${logstash-logback-encoder.version}</version>
             </dependency>
             <dependency>
                 <groupId>net.sf.dozer</groupId>
@@ -877,19 +878,24 @@
                 </exclusions>
             </dependency>
             <dependency>
-                <groupId>io.github.openfeign</groupId>
-                <artifactId>feign-httpclient</artifactId>
-                <version>${feign-httpclient.version}</version>
+                <groupId>org.apiguardian</groupId>
+                <artifactId>apiguardian-api</artifactId>
+                <version>${apiguardian-api.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.netflix.hystrix</groupId>
-                <artifactId>hystrix-javanica</artifactId>
-                <version>${hystrix-javanica.version}</version>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>${aspectj.version}</version>
             </dependency>
             <dependency>
-                <groupId>net.logstash.logback</groupId>
-                <artifactId>logstash-logback-encoder</artifactId>
-                <version>${logstash-logback-encoder.version}</version>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectj.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjtools</artifactId>
+                <version>${aspectj.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
