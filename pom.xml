@@ -11,7 +11,7 @@
     </parent>
     <groupId>org.openwms</groupId>
     <artifactId>org.openwms.parent</artifactId>
-    <version>19</version>
+    <version>19.1</version>
     <packaging>pom</packaging>
     <name>OpenWMS.org Parent Project</name>
     <description>OpenWMS.org is an open source warehouse management software</description>
@@ -200,15 +200,137 @@
 
     <profiles>
         <profile>
-            <id>sonar</id>
+            <id>coverage</id>
             <properties>
+                <asciidoc.skip>true</asciidoc.skip>
                 <debug.info>false</debug.info>
+                <enforcer.skip>true</enforcer.skip>
+                <sonar.coverage.jacoco.xmlReportPaths>${project.reporting.outputDirectory}/jacoco-merged-test-coverage-report/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+                <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+                <sonar.java.binaries>target/classes</sonar.java.binaries>
+                <sonar.java.source>${java.version}</sonar.java.source>
+                <sonar.organization>openwms-github</sonar.organization>
+                <sonar.projectKey>${project.groupId}:${project.artifactId}</sonar.projectKey>
+                <sonar.sources>src/main/java/</sonar.sources>
             </properties>
             <build>
                 <plugins>
                     <plugin>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <configuration>
+                            <argLine>${argLine} ${failsafe.jacoco.args}</argLine>
+                            <includes>
+                                <include>**/*IT.java</include>
+                                <include>**/*Documentation.java</include>
+                            </includes>
+                            <classesDirectory>${project.build.outputDirectory}</classesDirectory>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>integration-test</id>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>verify</id>
+                                <goals>
+                                    <goal>verify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <argLine>${argLine} ${surefire.jacoco.args}</argLine>
+                            <!-- Never set a forkCount to 0 bc. of Jacoco -->
+                            <excludes>
+                                <exclude>**/Abstract*.java</exclude>
+                                <exclude>**/*Tests.java</exclude>
+                            </excludes>
+                            <includes>
+                                <include>**/*Test.java</include>
+                            </includes>
+                        </configuration>
+                    </plugin>
+                    <plugin>
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>before-unit-test-execution</id>
+                                <goals>
+                                    <goal>prepare-agent</goal>
+                                </goals>
+                                <configuration>
+                                    <destFile>${project.build.directory}/jacoco-output/jacoco-unit-tests.exec</destFile>
+                                    <propertyName>surefire.jacoco.args</propertyName>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>after-unit-test-execution</id>
+                                <phase>test</phase>
+                                <goals>
+                                    <goal>report</goal>
+                                </goals>
+                                <configuration>
+                                    <dataFile>${project.build.directory}/jacoco-output/jacoco-unit-tests.exec</dataFile>
+                                    <outputDirectory>${project.reporting.outputDirectory}/jacoco-unit-test-coverage-report</outputDirectory>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>before-integration-test-execution</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>prepare-agent</goal>
+                                </goals>
+                                <configuration>
+                                    <destFile>${project.build.directory}/jacoco-output/jacoco-integration-tests.exec</destFile>
+                                    <propertyName>failsafe.jacoco.args</propertyName>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>after-integration-test-execution</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>report</goal>
+                                </goals>
+                                <configuration>
+                                    <dataFile>${project.build.directory}/jacoco-output/jacoco-integration-tests.exec</dataFile>
+                                    <outputDirectory>${project.reporting.outputDirectory}/jacoco-integration-test-coverage-report</outputDirectory>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>merge-unit-and-integration</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>merge</goal>
+                                </goals>
+                                <configuration>
+                                    <fileSets>
+                                        <fileSet>
+                                            <directory>${project.build.directory}/jacoco-output/</directory>
+                                            <includes>
+                                                <include>*.exec</include>
+                                            </includes>
+                                        </fileSet>
+                                    </fileSets>
+                                    <destFile>${project.build.directory}/jacoco-output/merged.exec</destFile>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>create-merged-report</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>report</goal>
+                                </goals>
+                                <configuration>
+                                    <dataFile>${project.build.directory}/jacoco-output/merged.exec</dataFile>
+                                    <outputDirectory>${project.reporting.outputDirectory}/jacoco-merged-test-coverage-report</outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
@@ -442,6 +564,7 @@
         <git-commit-id-plugin.version>4.0.4</git-commit-id-plugin.version> <!-- Keep in sync with boot -->
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version> <!-- Keep in sync with boot -->
         <maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version> <!-- Keep in sync with boot -->
+        <maven-failsafe-plugin.version>3.0.0-M5</maven-failsafe-plugin.version>
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
         <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version> <!-- Keep in sync with boot -->
         <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version> <!-- Keep in sync with boot -->
@@ -624,6 +747,32 @@
                     </configuration>
                 </plugin>
                 <plugin>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>${maven-failsafe-plugin.version}</version>
+                    <configuration>
+                        <argLine>${argLine}</argLine>
+                        <includes>
+                            <include>**/*IT.java</include>
+                            <include>**/*Documentation.java</include>
+                        </includes>
+                        <classesDirectory>${project.build.outputDirectory}</classesDirectory>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>integration-test</id>
+                            <goals>
+                                <goal>integration-test</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>verify</id>
+                            <goals>
+                                <goal>verify</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>${maven-resources-plugin.version}</version>
                     <executions>
@@ -681,8 +830,6 @@
                         </excludes>
                         <includes>
                             <include>**/*Test.java</include>
-                            <include>**/*IT.java</include>
-                            <include>**/*Documentation.java</include>
                         </includes>
                     </configuration>
                 </plugin>
@@ -756,7 +903,7 @@
                     <executions>
                         <execution>
                             <id>generate-docs</id>
-                            <phase>prepare-package</phase>
+                            <phase>post-integration-test</phase>
                             <goals>
                                 <goal>process-asciidoc</goal>
                             </goals>
