@@ -203,7 +203,6 @@
             <id>coverage</id>
             <properties>
                 <asciidoc.skip>true</asciidoc.skip>
-                <debug.info>false</debug.info>
                 <enforcer.skip>true</enforcer.skip>
                 <sonar.coverage.jacoco.xmlReportPaths>${project.reporting.outputDirectory}/jacoco-merged-test-coverage-report/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
                 <sonar.host.url>https://sonarcloud.io</sonar.host.url>
@@ -218,7 +217,7 @@
                     <plugin>
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <configuration>
-                            <argLine>${argLine} ${failsafe.jacoco.args}</argLine>
+                            <argLine>@{argLine} @{failsafe.jacoco.args}</argLine>
                             <includes>
                                 <include>**/*IT.java</include>
                                 <include>**/*Documentation.java</include>
@@ -243,7 +242,7 @@
                     <plugin>
                         <artifactId>maven-surefire-plugin</artifactId>
                         <configuration>
-                            <argLine>${argLine} ${surefire.jacoco.args}</argLine>
+                            <argLine>@{argLine} @{surefire.jacoco.args}</argLine>
                             <!-- Never set a forkCount to 0 bc. of Jacoco -->
                             <excludes>
                                 <exclude>**/Abstract*.java</exclude>
@@ -337,9 +336,6 @@
         </profile>
         <profile>
             <id>release</id>
-            <properties>
-                <debug.info>false</debug.info>
-            </properties>
             <build>
                 <plugins>
                     <plugin>
@@ -399,9 +395,6 @@
         </profile>
         <profile>
             <id>gpg</id>
-            <properties>
-                <debug.info>false</debug.info>
-            </properties>
             <build>
                 <pluginManagement>
                     <plugins>
@@ -570,7 +563,7 @@
         <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version> <!-- Keep in sync with boot -->
         <maven-project-info-reports-plugin.version>3.0.0</maven-project-info-reports-plugin.version>
         <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version> <!-- Keep in sync with boot -->
-        <maven-scm-publish-plugin.version>3.0.0</maven-scm-publish-plugin.version>
+        <maven-scm-publish-plugin.version>3.1.0</maven-scm-publish-plugin.version>
         <maven-site-plugin.version>3.9.1</maven-site-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version> <!-- Keep in sync with boot -->
         <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
@@ -750,7 +743,7 @@
                     <artifactId>maven-failsafe-plugin</artifactId>
                     <version>${maven-failsafe-plugin.version}</version>
                     <configuration>
-                        <argLine>${argLine}</argLine>
+                        <argLine>@{argLine}</argLine>
                         <includes>
                             <include>**/*IT.java</include>
                             <include>**/*Documentation.java</include>
