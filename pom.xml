@@ -529,7 +529,7 @@
         <documentation.snippet.dir>${documentation.dir}/generated-snippets</documentation.snippet.dir>
         <documentation.input.dir>${documentation.dir}/generated-docs</documentation.input.dir>
         <documentation.output.dir>${documentation.dir}/site/rest/${project.version}</documentation.output.dir>
-        <java.version>14</java.version>
+        <java.version>17</java.version>
         <javadoc.output.dir>${project.reporting.outputDirectory}/apidocs/${project.version}</javadoc.output.dir> <!-- Javadoc plugin config -->
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -542,46 +542,48 @@
 
         <!-- Dependency versions -->
         <ameba-lib.version>3.0-SNAPSHOT</ameba-lib.version>
-        <apiguardian-api.version>1.1.0</apiguardian-api.version>
-        <archunit.version>0.18.0</archunit.version>
-        <aspectj.version>1.9.6</aspectj.version> <!-- Keep in sync with boot -->
+        <apiguardian-api.version>1.1.2</apiguardian-api.version>
+        <archunit.version>0.22.0</archunit.version>
+        <aspectj.version>1.9.7</aspectj.version> <!-- Keep in sync with boot -->
         <commons-collections.version>3.2.2</commons-collections.version> <!-- This is bound to Dozer / Eureka Client -->
-        <dozer.version>6.5.0</dozer.version>
+        <dozer.version>6.5.2</dozer.version>
         <feign-httpclient.version>10.10.1</feign-httpclient.version> <!-- Keep in sync with spring-cloud-openfeign-dependencies -->
         <hystrix-javanica.version>1.5.18</hystrix-javanica.version> <!-- Keep in sync with spring-cloud-netflix-hystrix -->
         <junit-platform-surefire-provider.version>1.3.2</junit-platform-surefire-provider.version>
-        <logstash-logback-encoder.version>6.4</logstash-logback-encoder.version>
-        <postgresql.version>42.2.19</postgresql.version> <!-- Keep in sync with Boot -->
+        <junit-jupiter.version>5.8.1</junit-jupiter.version>
+        <logstash-logback-encoder.version>7.0.1</logstash-logback-encoder.version>
+        <postgresql.version>42.3.1</postgresql.version> <!-- Keep in sync with Boot -->
 
-        <spring-boot.version>2.4.5</spring-boot.version>
-        <spring-data-envers.version>2.5.0</spring-data-envers.version>
+        <spring-boot.version>2.6.1</spring-boot.version>
+        <spring-data-envers.version>2.6.0</spring-data-envers.version>
         <spring-restdocs-mockmvc.version>2.0.5.RELEASE</spring-restdocs-mockmvc.version>
-        <spring-framework.version>5.3.6</spring-framework.version> <!-- Keep in sync with boot -->
+        <spring-framework.version>5.3.13</spring-framework.version> <!-- Keep in sync with boot -->
         <start-class></start-class> <!-- keep it empty, set by actual boot module -->
 
         <!--   Plugin versions   -->
-        <asciidoctor-maven-plugin.version>2.0.0</asciidoctor-maven-plugin.version>
-        <aspectj-maven-plugin.version>1.12.9</aspectj-maven-plugin.version>
+        <apt-maven-plugin.version>1.1.3</apt-maven-plugin.version>
+        <asciidoctor-maven-plugin.version>2.2.1</asciidoctor-maven-plugin.version>
+        <aspectj-maven-plugin.version>1.14.0</aspectj-maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
-        <jib-maven-plugin.version>2.4.0</jib-maven-plugin.version>
-        <git-commit-id-plugin.version>4.0.4</git-commit-id-plugin.version> <!-- Keep in sync with boot -->
+        <jib-maven-plugin.version>3.1.4</jib-maven-plugin.version>
+        <git-commit-id-plugin.version>4.9.10</git-commit-id-plugin.version> <!-- Keep in sync with boot -->
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version> <!-- Keep in sync with boot -->
-        <maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version> <!-- Keep in sync with boot -->
+        <maven-enforcer-plugin.version>3.0.0</maven-enforcer-plugin.version> <!-- Keep in sync with boot -->
         <maven-failsafe-plugin.version>3.0.0-M5</maven-failsafe-plugin.version> <!-- Keep in sync with boot -->
-        <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
+        <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
         <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version> <!-- Keep in sync with boot -->
-        <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version> <!-- Keep in sync with boot -->
-        <maven-project-info-reports-plugin.version>3.0.0</maven-project-info-reports-plugin.version>
+        <maven-javadoc-plugin.version>3.3.1</maven-javadoc-plugin.version> <!-- Keep in sync with boot -->
+        <maven-project-info-reports-plugin.version>3.1.2</maven-project-info-reports-plugin.version>
         <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version> <!-- Keep in sync with boot -->
-        <maven-scm-publish-plugin.version>3.0.0</maven-scm-publish-plugin.version>
+        <maven-scm-publish-plugin.version>3.1.0</maven-scm-publish-plugin.version>
         <maven-site-plugin.version>3.9.1</maven-site-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version> <!-- Keep in sync with boot -->
         <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
-        <maven-surefire-report-plugin.version>3.0.0-M4</maven-surefire-report-plugin.version>
+        <maven-surefire-report-plugin.version>3.0.0-M5</maven-surefire-report-plugin.version>
         <surefire-junit47.version>3.0.0-M5</surefire-junit47.version>
         <versions-maven-plugin.version>2.8.1</versions-maven-plugin.version> <!-- Keep in sync with boot -->
-        <wagon-ftp.version>3.4.1</wagon-ftp.version>
-        <wagon-ssh.version>3.4.1</wagon-ssh.version>
+        <wagon-ftp.version>3.4.3</wagon-ftp.version>
+        <wagon-ssh.version>3.4.3</wagon-ssh.version>
     </properties>
 
     <reporting>
@@ -704,6 +706,42 @@
         </resources>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>com.mysema.maven</groupId>
+                    <artifactId>apt-maven-plugin</artifactId>
+                    <version>${apt-maven-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <phase>generate-sources</phase>
+                            <goals>
+                                <goal>process</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>target/generated-sources/jpa</outputDirectory>
+                                <options>
+                                    <querydsl.entityAccessors>true</querydsl.entityAccessors>
+                                    <querydsl.listAccessors>true</querydsl.listAccessors>
+                                </options>
+                                <processors>
+                                    <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+                                </processors>
+                            </configuration>
+                        </execution>
+                    </executions>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.querydsl</groupId>
+                            <artifactId>querydsl-apt</artifactId>
+                            <version>${querydsl.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>com.querydsl</groupId>
+                            <artifactId>querydsl-jpa</artifactId>
+                            <classifier>apt</classifier>
+                            <version>${querydsl.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
                 <plugin>
                     <groupId>com.google.cloud.tools</groupId>
                     <artifactId>jib-maven-plugin</artifactId>
@@ -843,7 +881,7 @@
                     </configuration>
                 </plugin>
                 <plugin>
-                    <groupId>io.starter</groupId>
+                    <groupId>org.codehaus.mojo</groupId>
                     <artifactId>aspectj-maven-plugin</artifactId>
                     <version>${aspectj-maven-plugin.version}</version>
                     <configuration>
@@ -1113,6 +1151,13 @@
                 <groupId>org.junit.platform</groupId>
                 <artifactId>junit-platform-surefire-provider</artifactId>
                 <version>${junit-platform-surefire-provider.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>${junit-jupiter.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
