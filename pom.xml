@@ -541,6 +541,7 @@
         <hystrix-javanica.version>1.5.18</hystrix-javanica.version> <!-- Keep in sync with spring-cloud-netflix-hystrix -->
         <junit-platform-surefire-provider.version>1.3.2</junit-platform-surefire-provider.version>
         <logstash-logback-encoder.version>6.4</logstash-logback-encoder.version>
+        <logback.version>1.2.10</logback.version>
         <postgresql.version>42.2.18</postgresql.version> <!-- Keep in sync with Boot -->
 
         <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
@@ -552,7 +553,7 @@
         <!--   Plugin versions   -->
         <asciidoctor-maven-plugin.version>2.0.0</asciidoctor-maven-plugin.version>
         <aspectj-maven-plugin.version>1.12.9</aspectj-maven-plugin.version>
-        <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
+        <jacoco-maven-plugin.version>0.8.8-SNAPSHOT</jacoco-maven-plugin.version>
         <jib-maven-plugin.version>2.4.0</jib-maven-plugin.version>
         <git-commit-id-plugin.version>4.0.4</git-commit-id-plugin.version> <!-- Keep in sync with boot -->
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version> <!-- Keep in sync with boot -->
@@ -984,6 +985,21 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-access</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
             <dependency>
                 <groupId>commons-collections</groupId>
                 <artifactId>commons-collections</artifactId>
