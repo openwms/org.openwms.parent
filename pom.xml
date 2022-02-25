@@ -545,10 +545,10 @@
         <logback.version>1.2.10</logback.version>
         <postgresql.version>42.3.1</postgresql.version> <!-- Keep in sync with Boot -->
 
-        <spring-boot.version>2.6.2</spring-boot.version>
+        <spring-boot.version>2.6.3</spring-boot.version>
         <spring-data-envers.version>2.6.0</spring-data-envers.version>
         <spring-restdocs-mockmvc.version>2.0.5.RELEASE</spring-restdocs-mockmvc.version>
-        <spring-framework.version>5.3.14</spring-framework.version> <!-- Keep in sync with boot -->
+        <spring-framework.version>5.3.15</spring-framework.version> <!-- Keep in sync with boot -->
         <start-class></start-class> <!-- keep it empty, set by actual boot module -->
 
         <!--   Plugin versions   -->
@@ -562,7 +562,7 @@
         <maven-enforcer-plugin.version>3.0.0</maven-enforcer-plugin.version> <!-- Keep in sync with boot -->
         <maven-failsafe-plugin.version>3.0.0-M5</maven-failsafe-plugin.version> <!-- Keep in sync with boot -->
         <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
-        <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version> <!-- Keep in sync with boot -->
+        <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version> <!-- Keep in sync with boot -->
         <maven-javadoc-plugin.version>3.3.1</maven-javadoc-plugin.version>
         <maven-project-info-reports-plugin.version>3.1.2</maven-project-info-reports-plugin.version>
         <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version> <!-- Keep in sync with boot -->
