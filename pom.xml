@@ -108,8 +108,8 @@
             <name>Michael Schmut</name>
             <email>smudo99@users.sourceforge.net</email>
             <url>https://sourceforge.net/users/smudo99</url>
-            <organization>IBM</organization>
-            <organizationUrl>http://www.ibm.com</organizationUrl>
+            <organization>SAP</organization>
+            <organizationUrl>https://www.sap.com</organizationUrl>
             <timezone>+2</timezone>
             <roles>
                 <role>Java Developer</role>
@@ -203,7 +203,6 @@
             <id>coverage</id>
             <properties>
                 <asciidoc.skip>true</asciidoc.skip>
-                <debug.info>false</debug.info>
                 <enforcer.skip>true</enforcer.skip>
                 <sonar.coverage.jacoco.xmlReportPaths>${project.reporting.outputDirectory}/jacoco-merged-test-coverage-report/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
                 <sonar.host.url>https://sonarcloud.io</sonar.host.url>
@@ -218,7 +217,7 @@
                     <plugin>
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <configuration>
-                            <argLine>${argLine} ${failsafe.jacoco.args}</argLine>
+                            <argLine>@{argLine} @{failsafe.jacoco.args}</argLine>
                             <includes>
                                 <include>**/*IT.java</include>
                                 <include>**/*Documentation.java</include>
@@ -243,7 +242,7 @@
                     <plugin>
                         <artifactId>maven-surefire-plugin</artifactId>
                         <configuration>
-                            <argLine>${argLine} ${surefire.jacoco.args}</argLine>
+                            <argLine>@{argLine} @{surefire.jacoco.args}</argLine>
                             <!-- Never set a forkCount to 0 bc. of Jacoco -->
                             <excludes>
                                 <exclude>**/Abstract*.java</exclude>
@@ -337,9 +336,6 @@
         </profile>
         <profile>
             <id>release</id>
-            <properties>
-                <debug.info>false</debug.info>
-            </properties>
             <build>
                 <plugins>
                     <plugin>
@@ -399,9 +395,6 @@
         </profile>
         <profile>
             <id>gpg</id>
-            <properties>
-                <debug.info>false</debug.info>
-            </properties>
             <build>
                 <pluginManagement>
                     <plugins>
@@ -515,7 +508,7 @@
         <!-- used by surefire plugin in combination with jacoco -->
         <argLine><![CDATA[-Dcatalina.base=${project.build.directory}
         --enable-preview
-        --illegal-access=permit
+        -Dsurefire.skipAfterFailureCount=1
         -Dorg.springframework.restdocs.outputDir=./target/generated-snippets
         -Ddocumentation.dir=./target
         -Dorg.jboss.logging.provider=slf4j
@@ -545,34 +538,37 @@
         <apiguardian-api.version>1.1.2</apiguardian-api.version>
         <archunit.version>0.22.0</archunit.version>
         <aspectj.version>1.9.7</aspectj.version> <!-- Keep in sync with boot -->
+        <aspectj-tools.version>1.9.7</aspectj-tools.version>
         <commons-collections.version>3.2.2</commons-collections.version> <!-- This is bound to Dozer / Eureka Client -->
         <dozer.version>6.5.2</dozer.version>
         <feign-httpclient.version>10.10.1</feign-httpclient.version> <!-- Keep in sync with spring-cloud-openfeign-dependencies -->
         <hystrix-javanica.version>1.5.18</hystrix-javanica.version> <!-- Keep in sync with spring-cloud-netflix-hystrix -->
         <junit-platform-surefire-provider.version>1.3.2</junit-platform-surefire-provider.version>
-        <junit-jupiter.version>5.8.1</junit-jupiter.version>
         <logstash-logback-encoder.version>7.0.1</logstash-logback-encoder.version>
-        <postgresql.version>42.3.1</postgresql.version> <!-- Keep in sync with Boot -->
+        <logback.version>1.2.10</logback.version>
+        <modulith.version>1.3.0</modulith.version>
+        <postgresql.version>42.3.3</postgresql.version> <!-- Keep in sync with Boot -->
+        <querydsl.version>5.0.0</querydsl.version>
 
-        <spring-boot.version>2.6.1</spring-boot.version>
+        <epring-boot.version>2.6.5</epring-boot.version>
         <spring-data-envers.version>2.6.0</spring-data-envers.version>
         <spring-restdocs-mockmvc.version>2.0.5.RELEASE</spring-restdocs-mockmvc.version>
-        <spring-framework.version>5.3.13</spring-framework.version> <!-- Keep in sync with boot -->
+        <spring-framework.version>5.3.18</spring-framework.version> <!-- Keep in sync with boot -->
         <start-class></start-class> <!-- keep it empty, set by actual boot module -->
 
         <!--   Plugin versions   -->
         <apt-maven-plugin.version>1.1.3</apt-maven-plugin.version>
         <asciidoctor-maven-plugin.version>2.2.1</asciidoctor-maven-plugin.version>
         <aspectj-maven-plugin.version>1.14.0</aspectj-maven-plugin.version>
-        <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
+        <jacoco-maven-plugin.version>0.8.9-SNAPSHOT</jacoco-maven-plugin.version>
         <jib-maven-plugin.version>3.1.4</jib-maven-plugin.version>
         <git-commit-id-plugin.version>4.9.10</git-commit-id-plugin.version> <!-- Keep in sync with boot -->
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version> <!-- Keep in sync with boot -->
         <maven-enforcer-plugin.version>3.0.0</maven-enforcer-plugin.version> <!-- Keep in sync with boot -->
         <maven-failsafe-plugin.version>3.0.0-M5</maven-failsafe-plugin.version> <!-- Keep in sync with boot -->
         <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
-        <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version> <!-- Keep in sync with boot -->
-        <maven-javadoc-plugin.version>3.3.1</maven-javadoc-plugin.version> <!-- Keep in sync with boot -->
+        <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version> <!-- Keep in sync with boot -->
+        <maven-javadoc-plugin.version>3.3.1</maven-javadoc-plugin.version>
         <maven-project-info-reports-plugin.version>3.1.2</maven-project-info-reports-plugin.version>
         <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version> <!-- Keep in sync with boot -->
         <maven-scm-publish-plugin.version>3.1.0</maven-scm-publish-plugin.version>
@@ -580,7 +576,6 @@
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version> <!-- Keep in sync with boot -->
         <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
         <maven-surefire-report-plugin.version>3.0.0-M5</maven-surefire-report-plugin.version>
-        <surefire-junit47.version>3.0.0-M5</surefire-junit47.version>
         <versions-maven-plugin.version>2.8.1</versions-maven-plugin.version> <!-- Keep in sync with boot -->
         <wagon-ftp.version>3.4.3</wagon-ftp.version>
         <wagon-ssh.version>3.4.3</wagon-ssh.version>
@@ -748,14 +743,13 @@
                     <version>${jib-maven-plugin.version}</version>
                     <configuration>
                         <from>
-                            <image>adoptopenjdk/openjdk16-openj9:jre-16_36_openj9-0.25.0-alpine</image>
+                            <image>openjdk:17.0.1-oracle</image>
                         </from>
                         <to>
                             <image>docker.io/openwms/${project.artifactId}:latest</image>
                         </to>
                         <container>
                             <jvmFlags>
-                                <jvmFlag>-noverify</jvmFlag>
                                 <jvmFlag>-Xss512k</jvmFlag>
                             </jvmFlags>
                             <useCurrentTimestamp>true</useCurrentTimestamp>
@@ -766,9 +760,6 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${maven-compiler-plugin.version}</version>
                     <configuration>
-                        <compilerArgs>
-                            <arg>--enable-preview</arg>
-                        </compilerArgs>
                         <forceJavacCompilerUse>true</forceJavacCompilerUse>
                         <debug>${debug.info}</debug>
                         <encoding>${project.build.sourceEncoding}</encoding>
@@ -778,6 +769,11 @@
                         <optimize>true</optimize>
                         <parameters>true</parameters>
                         <release>${java.version}</release>
+                        <compilerArgs>
+                            <compilerArg>
+                                --enable-preview
+                            </compilerArg>
+                        </compilerArgs>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -797,7 +793,7 @@
                     <artifactId>maven-failsafe-plugin</artifactId>
                     <version>${maven-failsafe-plugin.version}</version>
                     <configuration>
-                        <argLine>${argLine}</argLine>
+                        <argLine>@{argLine}</argLine>
                         <includes>
                             <include>**/*IT.java</include>
                             <include>**/*Documentation.java</include>
@@ -921,7 +917,7 @@
                         <dependency>
                             <groupId>org.aspectj</groupId>
                             <artifactId>aspectjtools</artifactId>
-                            <version>${aspectj.version}</version>
+                            <version>${aspectj-tools.version}</version>
                         </dependency>
                     </dependencies>
                 </plugin>
@@ -988,7 +984,7 @@
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>${jacoco-maven-plugin.version}</version>
-                    <executions>
+                    <!--executions>
                         <execution>
                             <goals>
                                 <goal>prepare-agent</goal>
@@ -1001,7 +997,7 @@
                                 <goal>report</goal>
                             </goals>
                         </execution>
-                    </executions>
+                    </executions-->
                 </plugin>
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
@@ -1039,6 +1035,21 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-access</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>commons-collections</groupId>
                 <artifactId>commons-collections</artifactId>
                 <version>${commons-collections.version}</version>
@@ -1047,6 +1058,26 @@
                 <groupId>com.netflix.hystrix</groupId>
                 <artifactId>hystrix-javanica</artifactId>
                 <version>${hystrix-javanica.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-apt</artifactId>
+                <version>${querydsl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-core</artifactId>
+                <version>${querydsl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-collections</artifactId>
+                <version>${querydsl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-jpa</artifactId>
+                <version>${querydsl.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.tngtech.archunit</groupId>
@@ -1128,7 +1159,18 @@
             <dependency>
                 <groupId>org.aspectj</groupId>
                 <artifactId>aspectjtools</artifactId>
-                <version>${aspectj.version}</version>
+                <version>${aspectj-tools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.moduliths</groupId>
+                <artifactId>moduliths-core</artifactId>
+                <version>${modulith.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.moduliths</groupId>
+                <artifactId>moduliths-test</artifactId>
+                <version>${modulith.version}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -1147,33 +1189,11 @@
                 <artifactId>spring-data-envers</artifactId>
                 <version>${spring-data-envers.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.junit.platform</groupId>
-                <artifactId>junit-platform-surefire-provider</artifactId>
-                <version>${junit-platform-surefire-provider.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.junit</groupId>
-                <artifactId>junit-bom</artifactId>
-                <version>${junit-jupiter.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
         <!-- Test dependencies -->
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <scope>test</scope>
-        </dependency>
         <dependency>
             <groupId>com.tngtech.archunit</groupId>
             <artifactId>archunit-junit5-engine</artifactId>
