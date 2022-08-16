@@ -97,7 +97,7 @@
             <email>flauer99@users.sourceforge.net</email>
             <url>https://sourceforge.net/users/flauer99</url>
             <organization>Aberle GmbH</organization>
-            <organizationUrl>http://www.a-s.de</organizationUrl>
+            <organizationUrl>https://www.a-s.de</organizationUrl>
             <timezone>+2</timezone>
             <roles>
                 <role>Java Developer</role>
@@ -428,7 +428,7 @@
                 <schemaspy-maven-plugin.version>5.1.0</schemaspy-maven-plugin.version>
                 <surefireArgs>-Dspring.profiles.active=ASYNCHRONOUS,TEST,TESTPG</surefireArgs>
                 <schemagen.outputDirectory>${project.build.directory}/site/${project.version}</schemagen.outputDirectory>
-                <M2_REPO_DIR>/home/travis/.m2/repository</M2_REPO_DIR>
+                <M2_REPO_DIR>/home/runner/.m2/repository</M2_REPO_DIR>
                 <SCHEMA>public</SCHEMA>
                 <DB_USERNAME>KARL</DB_USERNAME>
                 <DB_PASSWORD>KARL</DB_PASSWORD>
