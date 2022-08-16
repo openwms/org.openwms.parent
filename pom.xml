@@ -11,7 +11,7 @@
     </parent>
     <groupId>org.openwms</groupId>
     <artifactId>org.openwms.parent</artifactId>
-    <version>20</version>
+    <version>21</version>
     <packaging>pom</packaging>
     <name>OpenWMS.org Parent Project</name>
     <description>OpenWMS.org is an open source warehouse management software</description>
@@ -97,7 +97,7 @@
             <email>flauer99@users.sourceforge.net</email>
             <url>https://sourceforge.net/users/flauer99</url>
             <organization>Aberle GmbH</organization>
-            <organizationUrl>http://www.a-s.de</organizationUrl>
+            <organizationUrl>https://www.a-s.de</organizationUrl>
             <timezone>+2</timezone>
             <roles>
                 <role>Java Developer</role>
@@ -109,7 +109,7 @@
             <email>smudo99@users.sourceforge.net</email>
             <url>https://sourceforge.net/users/smudo99</url>
             <organization>SAP</organization>
-            <organizationUrl>http://www.sap.com</organizationUrl>
+            <organizationUrl>https://www.sap.com</organizationUrl>
             <timezone>+2</timezone>
             <roles>
                 <role>Java Developer</role>
@@ -428,7 +428,7 @@
                 <schemaspy-maven-plugin.version>5.1.0</schemaspy-maven-plugin.version>
                 <surefireArgs>-Dspring.profiles.active=ASYNCHRONOUS,TEST,TESTPG</surefireArgs>
                 <schemagen.outputDirectory>${project.build.directory}/site/${project.version}</schemagen.outputDirectory>
-                <M2_REPO_DIR>/home/travis/.m2/repository</M2_REPO_DIR>
+                <M2_REPO_DIR>/home/runner/.m2/repository</M2_REPO_DIR>
                 <SCHEMA>public</SCHEMA>
                 <DB_USERNAME>KARL</DB_USERNAME>
                 <DB_PASSWORD>KARL</DB_PASSWORD>
@@ -538,6 +538,7 @@
         <apiguardian-api.version>1.1.2</apiguardian-api.version>
         <archunit.version>0.22.0</archunit.version>
         <aspectj.version>1.9.7</aspectj.version> <!-- Keep in sync with boot -->
+        <aspectj-tools.version>1.9.9.1</aspectj-tools.version>
         <commons-collections.version>3.2.2</commons-collections.version> <!-- This is bound to Dozer / Eureka Client -->
         <dozer.version>6.5.2</dozer.version>
         <feign-httpclient.version>11.8</feign-httpclient.version> <!-- Keep in sync with spring-cloud-openfeign-dependencies -->
@@ -914,7 +915,7 @@
                         <dependency>
                             <groupId>org.aspectj</groupId>
                             <artifactId>aspectjtools</artifactId>
-                            <version>${aspectj.version}</version>
+                            <version>${aspectj-tools.version}</version>
                         </dependency>
                     </dependencies>
                 </plugin>
@@ -1151,7 +1152,7 @@
             <dependency>
                 <groupId>org.aspectj</groupId>
                 <artifactId>aspectjtools</artifactId>
-                <version>${aspectj.version}</version>
+                <version>${aspectj-tools.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
