@@ -549,9 +549,10 @@
         <querydsl.version>5.0.0</querydsl.version>
 
         <spring-boot.version>2.7.0</spring-boot.version>
-        <spring-data-envers.version>2.7.0</spring-data-envers.version>
+        <spring-data-envers.version>2.7.4</spring-data-envers.version>
         <spring-restdocs-mockmvc.version>2.0.6.RELEASE</spring-restdocs-mockmvc.version>
-        <spring-framework.version>5.3.20</spring-framework.version> <!-- Keep in sync with boot -->
+        <spring-framework.version>5.3.23</spring-framework.version> <!-- Keep in sync with boot -->
+        <spring-plugin-core.version>2.0.0.RELEASE</spring-plugin-core.version>
         <start-class></start-class> <!-- keep it empty, set by actual boot module -->
 
         <!--   Plugin versions   -->
@@ -1170,6 +1171,16 @@
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-envers</artifactId>
                 <version>${spring-data-envers.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.plugin</groupId>
+                <artifactId>spring-plugin-core</artifactId>
+                <version>${spring-plugin-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.plugin</groupId>
+                <artifactId>spring-plugin-metadata</artifactId>
+                <version>${spring-plugin-core.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
