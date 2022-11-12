@@ -545,10 +545,10 @@
         <logstash-logback-encoder.version>7.2</logstash-logback-encoder.version>
         <logback.version>1.2.11</logback.version> <!-- Keep in sync with boot -->
         <modulith.version>1.3.0</modulith.version>
-        <postgresql.version>42.3.5</postgresql.version> <!-- Keep in sync with Boot -->
+        <postgresql.version>42.3.7</postgresql.version> <!-- Keep in sync with Boot -->
         <querydsl.version>5.0.0</querydsl.version>
 
-        <spring-boot.version>2.7.0</spring-boot.version>
+        <spring-boot.version>2.7.5</spring-boot.version>
         <spring-data-envers.version>2.7.4</spring-data-envers.version>
         <spring-restdocs-mockmvc.version>2.0.6.RELEASE</spring-restdocs-mockmvc.version>
         <spring-framework.version>5.3.23</spring-framework.version> <!-- Keep in sync with boot -->
@@ -564,7 +564,7 @@
         <git-commit-id-plugin.version>4.9.10</git-commit-id-plugin.version> <!-- Keep in sync with boot -->
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version> <!-- Keep in sync with boot -->
         <maven-enforcer-plugin.version>3.0.0</maven-enforcer-plugin.version> <!-- Keep in sync with boot -->
-        <maven-failsafe-plugin.version>3.0.0-M6</maven-failsafe-plugin.version> <!-- Keep in sync with boot -->
+        <maven-failsafe-plugin.version>3.0.0-M6</maven-failsafe-plugin.version>
         <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
         <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version> <!-- Keep in sync with boot -->
         <maven-javadoc-plugin.version>3.4.0</maven-javadoc-plugin.version>
