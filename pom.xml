@@ -11,7 +11,7 @@
     </parent>
     <groupId>org.openwms</groupId>
     <artifactId>org.openwms.parent</artifactId>
-    <version>22</version>
+    <version>23</version>
     <packaging>pom</packaging>
     <name>OpenWMS.org Parent Project</name>
     <description>OpenWMS.org is an open source warehouse management software</description>
@@ -541,17 +541,16 @@
         <aspectj-tools.version>1.9.9.1</aspectj-tools.version>
         <commons-collections.version>3.2.2</commons-collections.version> <!-- This is bound to Dozer / Eureka Client -->
         <dozer.version>6.5.2</dozer.version>
-        <feign-httpclient.version>11.8</feign-httpclient.version> <!-- Keep in sync with spring-cloud-openfeign-dependencies -->
+        <feign.version>11.10</feign.version> <!-- Keep in sync with spring-cloud-openfeign-dependencies -->
         <logstash-logback-encoder.version>7.2</logstash-logback-encoder.version>
         <logback.version>1.2.11</logback.version> <!-- Keep in sync with boot -->
-        <modulith.version>1.3.0</modulith.version>
-        <postgresql.version>42.3.7</postgresql.version> <!-- Keep in sync with Boot -->
+        <postgresql.version>42.3.8</postgresql.version> <!-- Keep in sync with Boot -->
         <querydsl.version>5.0.0</querydsl.version>
 
-        <spring-boot.version>2.7.5</spring-boot.version>
-        <spring-data-envers.version>2.7.4</spring-data-envers.version>
-        <spring-restdocs-mockmvc.version>2.0.6.RELEASE</spring-restdocs-mockmvc.version>
-        <spring-framework.version>5.3.23</spring-framework.version> <!-- Keep in sync with boot -->
+        <spring-boot.version>2.7.8</spring-boot.version>
+        <spring-data-envers.version>2.7.7</spring-data-envers.version>
+        <spring-restdocs-mockmvc.version>2.0.7.RELEASE</spring-restdocs-mockmvc.version>
+        <spring-framework.version>5.3.25</spring-framework.version> <!-- Keep in sync with boot -->
         <spring-plugin-core.version>2.0.0.RELEASE</spring-plugin-core.version>
         <start-class></start-class> <!-- keep it empty, set by actual boot module -->
 
@@ -1098,7 +1097,7 @@
             <dependency>
                 <groupId>io.github.openfeign</groupId>
                 <artifactId>feign-httpclient</artifactId>
-                <version>${feign-httpclient.version}</version>
+                <version>${feign.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.interface21</groupId>
