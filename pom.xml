@@ -549,7 +549,7 @@
         <querydsl.version>5.0.0</querydsl.version>
 
         <spring-boot.version>2.7.8</spring-boot.version>
-        <spring-data-envers.version>2.7.7</spring-data-envers.version>
+        <spring-data-envers.version>2.7.9</spring-data-envers.version>
         <spring-restdocs-mockmvc.version>2.0.7.RELEASE</spring-restdocs-mockmvc.version>
         <spring-framework.version>5.3.25</spring-framework.version> <!-- Keep in sync with boot -->
         <spring-plugin-core.version>2.0.0.RELEASE</spring-plugin-core.version>
@@ -1164,7 +1164,6 @@
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct-processor</artifactId>
                 <version>${org.mapstruct.version}</version>
-                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
