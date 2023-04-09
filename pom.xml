@@ -761,6 +761,7 @@
                     <configuration>
                         <forceJavacCompilerUse>true</forceJavacCompilerUse>
                         <debug>${debug.info}</debug>
+                        <enablePreview>true</enablePreview>
                         <encoding>${project.build.sourceEncoding}</encoding>
                         <source>${java.version}</source>
                         <target>${java.version}</target>
@@ -768,11 +769,6 @@
                         <optimize>true</optimize>
                         <parameters>true</parameters>
                         <release>${java.version}</release>
-                        <compilerArgs>
-                            <compilerArg>
-                                --enable-preview
-                            </compilerArg>
-                        </compilerArgs>
                     </configuration>
                 </plugin>
                 <plugin>
