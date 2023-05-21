@@ -543,15 +543,14 @@
         <dozer.version>6.5.2</dozer.version>
         <feign.version>11.10</feign.version> <!-- Keep in sync with spring-cloud-openfeign-dependencies -->
         <logstash-logback-encoder.version>7.2</logstash-logback-encoder.version>
-        <logback.version>1.2.11</logback.version> <!-- Keep in sync with boot -->
+        <logback.version>1.2.12</logback.version> <!-- Keep in sync with boot -->
         <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
         <postgresql.version>42.3.8</postgresql.version> <!-- Keep in sync with Boot -->
         <querydsl.version>5.0.0</querydsl.version>
 
-        <spring-boot.version>2.7.8</spring-boot.version>
+        <spring-boot.version>2.7.12</spring-boot.version>
         <spring-data-envers.version>2.7.9</spring-data-envers.version>
-        <spring-restdocs-mockmvc.version>2.0.7.RELEASE</spring-restdocs-mockmvc.version>
-        <spring-framework.version>5.3.25</spring-framework.version> <!-- Keep in sync with boot -->
+        <spring-framework.version>5.3.27</spring-framework.version> <!-- Keep in sync with boot -->
         <spring-plugin-core.version>2.0.0.RELEASE</spring-plugin-core.version>
         <start-class></start-class> <!-- keep it empty, set by actual boot module -->
 
@@ -559,7 +558,7 @@
         <apt-maven-plugin.version>1.1.3</apt-maven-plugin.version>
         <asciidoctor-maven-plugin.version>2.2.2</asciidoctor-maven-plugin.version>
         <aspectj-maven-plugin.version>1.14.0</aspectj-maven-plugin.version>
-        <jacoco-maven-plugin.version>0.8.9-SNAPSHOT</jacoco-maven-plugin.version>
+        <jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
         <jib-maven-plugin.version>3.2.1</jib-maven-plugin.version>
         <git-commit-id-plugin.version>4.9.10</git-commit-id-plugin.version> <!-- Keep in sync with boot -->
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version> <!-- Keep in sync with boot -->
