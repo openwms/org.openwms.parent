@@ -394,6 +394,13 @@
             </build>
         </profile>
         <profile>
+            <id>release-project</id>
+            <properties>
+                <developerConnectionUrl>scm:git:https://openwms@github.com/openwms/${project.artifactId}.git</developerConnectionUrl>
+                <scmpublish.pubScmUrl>scm:git:https://openwms@github.com/openwms/${project.artifactId}.git</scmpublish.pubScmUrl>
+            </properties>
+        </profile>
+        <profile>
             <id>gpg</id>
             <build>
                 <pluginManagement>
@@ -567,11 +574,11 @@
         <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
         <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version> <!-- Keep in sync with boot -->
         <maven-javadoc-plugin.version>3.4.0</maven-javadoc-plugin.version>
-        <maven-project-info-reports-plugin.version>3.1.2</maven-project-info-reports-plugin.version>
+        <maven-project-info-reports-plugin.version>3.4.4</maven-project-info-reports-plugin.version>
         <maven-release-plugin.version>3.0.0</maven-release-plugin.version>
         <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version> <!-- Keep in sync with boot -->
         <maven-scm-publish-plugin.version>3.1.0</maven-scm-publish-plugin.version>
-        <maven-site-plugin.version>3.12.0</maven-site-plugin.version>
+        <maven-site-plugin.version>4.0.0-M8</maven-site-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version> <!-- Keep in sync with boot -->
         <maven-surefire-plugin.version>3.0.0-M6</maven-surefire-plugin.version>
         <maven-surefire-report-plugin.version>3.0.0-M6</maven-surefire-report-plugin.version>
@@ -809,6 +816,16 @@
                             </goals>
                         </execution>
                     </executions>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>${maven-release-plugin.version}</version>
+                    <configuration>
+                        <autoVersionSubmodules>true</autoVersionSubmodules>
+                        <goals>deploy site scm-publish:publish-scm</goals>
+                        <preparationProfiles>release,release-project</preparationProfiles>
+                        <releaseProfiles>release,release-project</releaseProfiles>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
