@@ -11,7 +11,7 @@
     </parent>
     <groupId>org.openwms</groupId>
     <artifactId>org.openwms.parent</artifactId>
-    <version>24</version>
+    <version>25</version>
     <packaging>pom</packaging>
     <name>OpenWMS.org Parent Project</name>
     <description>OpenWMS.org is an open source warehouse management software</description>
@@ -544,21 +544,21 @@
         <ameba-lib.version>3.0</ameba-lib.version>
         <apiguardian-api.version>1.1.2</apiguardian-api.version>
         <archunit.version>0.22.0</archunit.version>
-        <aspectj.version>1.9.7</aspectj.version> <!-- Keep in sync with boot -->
+        <aspectj.version>1.9.19</aspectj.version> <!-- Keep in sync with boot -->
         <aspectj-tools.version>1.9.9.1</aspectj-tools.version>
         <commons-collections.version>3.2.2</commons-collections.version> <!-- This is bound to Dozer / Eureka Client -->
         <dozer.version>6.5.2</dozer.version>
         <feign.version>11.10</feign.version> <!-- Keep in sync with spring-cloud-openfeign-dependencies -->
-        <logstash-logback-encoder.version>7.2</logstash-logback-encoder.version>
-        <logback.version>1.2.12</logback.version> <!-- Keep in sync with boot -->
-        <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
-        <postgresql.version>42.3.8</postgresql.version> <!-- Keep in sync with Boot -->
+        <logstash-logback-encoder.version>7.3</logstash-logback-encoder.version>
+        <logback.version>1.4.7</logback.version> <!-- Keep in sync with boot -->
+        <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
+        <postgresql.version>42.6.0</postgresql.version> <!-- Keep in sync with Boot -->
         <querydsl.version>5.0.0</querydsl.version>
 
-        <spring-boot.version>2.7.12</spring-boot.version>
-        <spring-data-envers.version>2.7.9</spring-data-envers.version>
-        <spring-framework.version>5.3.27</spring-framework.version> <!-- Keep in sync with boot -->
-        <spring-plugin-core.version>2.0.0.RELEASE</spring-plugin-core.version>
+        <spring-boot.version>3.1.0</spring-boot.version>
+        <spring-data-envers.version>3.1.0</spring-data-envers.version>
+        <spring-framework.version>6.0.9</spring-framework.version> <!-- Keep in sync with boot -->
+        <spring-plugin-core.version>3.0.0</spring-plugin-core.version>
         <start-class></start-class> <!-- keep it empty, set by actual boot module -->
 
         <!--   Plugin versions   -->
@@ -567,22 +567,22 @@
         <aspectj-maven-plugin.version>1.14.0</aspectj-maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
         <jib-maven-plugin.version>3.2.1</jib-maven-plugin.version>
-        <git-commit-id-plugin.version>4.9.10</git-commit-id-plugin.version> <!-- Keep in sync with boot -->
-        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version> <!-- Keep in sync with boot -->
-        <maven-enforcer-plugin.version>3.0.0</maven-enforcer-plugin.version> <!-- Keep in sync with boot -->
-        <maven-failsafe-plugin.version>3.0.0-M6</maven-failsafe-plugin.version>
+        <git-commit-id-maven-plugin.version>5.0.0</git-commit-id-maven-plugin.version> <!-- Keep in sync with boot -->
+        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version> <!-- Keep in sync with boot -->
+        <maven-enforcer-plugin.version>3.3.0</maven-enforcer-plugin.version> <!-- Keep in sync with boot -->
+        <maven-failsafe-plugin.version>3.1.2</maven-failsafe-plugin.version>
         <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
-        <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version> <!-- Keep in sync with boot -->
+        <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version> <!-- Keep in sync with boot -->
         <maven-javadoc-plugin.version>3.4.0</maven-javadoc-plugin.version>
         <maven-project-info-reports-plugin.version>3.4.4</maven-project-info-reports-plugin.version>
-        <maven-release-plugin.version>3.0.0</maven-release-plugin.version>
-        <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version> <!-- Keep in sync with boot -->
+        <maven-release-plugin.version>3.0.1</maven-release-plugin.version>
+        <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version> <!-- Keep in sync with boot -->
         <maven-scm-publish-plugin.version>3.1.0</maven-scm-publish-plugin.version>
         <maven-site-plugin.version>4.0.0-M8</maven-site-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version> <!-- Keep in sync with boot -->
-        <maven-surefire-plugin.version>3.0.0-M6</maven-surefire-plugin.version>
-        <maven-surefire-report-plugin.version>3.0.0-M6</maven-surefire-report-plugin.version>
-        <versions-maven-plugin.version>2.10.0</versions-maven-plugin.version> <!-- Keep in sync with boot -->
+        <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
+        <maven-surefire-report-plugin.version>3.1.2</maven-surefire-report-plugin.version>
+        <versions-maven-plugin.version>2.15.0</versions-maven-plugin.version> <!-- Keep in sync with boot -->
         <wagon-ftp.version>3.4.3</wagon-ftp.version>
         <wagon-ssh.version>3.4.3</wagon-ssh.version>
     </properties>
@@ -934,9 +934,9 @@
                     </dependencies>
                 </plugin>
                 <plugin>
-                    <groupId>pl.project13.maven</groupId>
-                    <artifactId>git-commit-id-plugin</artifactId>
-                    <version>${git-commit-id-plugin.version}</version>
+                    <groupId>io.github.git-commit-id</groupId>
+                    <artifactId>git-commit-id-maven-plugin</artifactId>
+                    <version>${git-commit-id-maven-plugin.version}</version>
                     <executions>
                         <execution>
                             <goals>
@@ -1038,8 +1038,8 @@
                 <version>${maven-jar-plugin.version}</version>
             </plugin>
             <plugin>
-                <groupId>pl.project13.maven</groupId>
-                <artifactId>git-commit-id-plugin</artifactId>
+                <groupId>io.github.git-commit-id</groupId>
+                <artifactId>git-commit-id-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
