@@ -11,7 +11,7 @@
     </parent>
     <groupId>org.openwms</groupId>
     <artifactId>org.openwms.parent</artifactId>
-    <version>24</version>
+    <version>25</version>
     <packaging>pom</packaging>
     <name>OpenWMS.org Parent Project</name>
     <description>OpenWMS.org is an open source warehouse management software</description>
@@ -514,7 +514,6 @@
     <properties>
         <!-- used by surefire plugin in combination with jacoco -->
         <argLine><![CDATA[-Dcatalina.base=${project.build.directory}
-        --enable-preview
         -Dsurefire.skipAfterFailureCount=1
         -Dorg.springframework.restdocs.outputDir=./target/generated-snippets
         -Ddocumentation.dir=./target
@@ -529,7 +528,7 @@
         <documentation.snippet.dir>${documentation.dir}/generated-snippets</documentation.snippet.dir>
         <documentation.input.dir>${documentation.dir}/generated-docs</documentation.input.dir>
         <documentation.output.dir>${documentation.dir}/site/rest/${project.version}</documentation.output.dir>
-        <java.version>17</java.version>
+        <java.version>21</java.version>
         <javadoc.output.dir>${project.reporting.outputDirectory}/apidocs/${project.version}</javadoc.output.dir> <!-- Javadoc plugin config -->
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -551,13 +550,13 @@
         <feign.version>11.10</feign.version> <!-- Keep in sync with spring-cloud-openfeign-dependencies -->
         <logstash-logback-encoder.version>7.2</logstash-logback-encoder.version>
         <logback.version>1.2.12</logback.version> <!-- Keep in sync with boot -->
-        <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
+        <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
         <postgresql.version>42.3.8</postgresql.version> <!-- Keep in sync with Boot -->
         <querydsl.version>5.0.0</querydsl.version>
 
-        <spring-boot.version>2.7.12</spring-boot.version>
+        <spring-boot.version>2.7.16</spring-boot.version>
         <spring-data-envers.version>2.7.9</spring-data-envers.version>
-        <spring-framework.version>5.3.27</spring-framework.version> <!-- Keep in sync with boot -->
+        <spring-framework.version>5.3.30</spring-framework.version> <!-- Keep in sync with boot -->
         <spring-plugin-core.version>2.0.0.RELEASE</spring-plugin-core.version>
         <start-class></start-class> <!-- keep it empty, set by actual boot module -->
 
@@ -569,8 +568,8 @@
         <jib-maven-plugin.version>3.2.1</jib-maven-plugin.version>
         <git-commit-id-plugin.version>4.9.10</git-commit-id-plugin.version> <!-- Keep in sync with boot -->
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version> <!-- Keep in sync with boot -->
-        <maven-enforcer-plugin.version>3.0.0</maven-enforcer-plugin.version> <!-- Keep in sync with boot -->
-        <maven-failsafe-plugin.version>3.0.0-M6</maven-failsafe-plugin.version>
+        <maven-enforcer-plugin.version>3.4.1</maven-enforcer-plugin.version> <!-- Keep in sync with boot -->
+        <maven-failsafe-plugin.version>3.0.0</maven-failsafe-plugin.version>
         <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
         <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version> <!-- Keep in sync with boot -->
         <maven-javadoc-plugin.version>3.4.0</maven-javadoc-plugin.version>
@@ -580,8 +579,8 @@
         <maven-scm-publish-plugin.version>3.1.0</maven-scm-publish-plugin.version>
         <maven-site-plugin.version>4.0.0-M8</maven-site-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version> <!-- Keep in sync with boot -->
-        <maven-surefire-plugin.version>3.0.0-M6</maven-surefire-plugin.version>
-        <maven-surefire-report-plugin.version>3.0.0-M6</maven-surefire-report-plugin.version>
+        <maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
+        <maven-surefire-report-plugin.version>3.0.0</maven-surefire-report-plugin.version>
         <versions-maven-plugin.version>2.10.0</versions-maven-plugin.version> <!-- Keep in sync with boot -->
         <wagon-ftp.version>3.4.3</wagon-ftp.version>
         <wagon-ssh.version>3.4.3</wagon-ssh.version>
@@ -749,7 +748,7 @@
                     <version>${jib-maven-plugin.version}</version>
                     <configuration>
                         <from>
-                            <image>openjdk:17.0.1-oracle</image>
+                            <image>amazoncorretto:21-alpine</image>
                         </from>
                         <to>
                             <image>docker.io/openwms/${project.artifactId}:latest</image>
@@ -1031,6 +1030,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${maven-enforcer-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -1040,6 +1040,7 @@
             <plugin>
                 <groupId>pl.project13.maven</groupId>
                 <artifactId>git-commit-id-plugin</artifactId>
+                <version>${git-commit-id-plugin.version}</version>
             </plugin>
         </plugins>
     </build>
