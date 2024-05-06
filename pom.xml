@@ -543,21 +543,19 @@
         <ameba-lib.version>4.0-SNAPSHOT</ameba-lib.version>
         <apiguardian-api.version>1.1.2</apiguardian-api.version>
         <archunit.version>0.22.0</archunit.version>
-        <aspectj.version>1.9.19</aspectj.version> <!-- Keep in sync with boot -->
-        <aspectj-tools.version>1.9.9.1</aspectj-tools.version>
-        <commons-collections.version>3.2.2</commons-collections.version> <!-- This is bound to Dozer / Eureka Client -->
-        <dozer.version>6.5.2</dozer.version>
-        <feign.version>11.10</feign.version> <!-- Keep in sync with spring-cloud-openfeign-dependencies -->
+        <aspectj.version>1.9.22</aspectj.version> <!-- Keep in sync with boot -->
+        <aspectj-tools.version>1.9.22</aspectj-tools.version>
+        <feign.version>13.2.1</feign.version> <!-- Keep in sync with spring-cloud-openfeign-dependencies -->
         <jolokia-core.version>1.7.2</jolokia-core.version>
-        <logstash-logback-encoder.version>7.3</logstash-logback-encoder.version>
-        <logback.version>1.4.7</logback.version> <!-- Keep in sync with boot -->
+        <logstash-logback-encoder.version>7.4</logstash-logback-encoder.version>
+        <logback.version>1.4.14</logback.version> <!-- Keep in sync with boot -->
         <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
-        <postgresql.version>42.6.0</postgresql.version> <!-- Keep in sync with Boot -->
-        <querydsl.version>5.0.0</querydsl.version>
+        <postgresql.version>42.6.2</postgresql.version> <!-- Keep in sync with Boot -->
+        <querydsl.version>5.1.0</querydsl.version>
 
-        <spring-boot.version>3.1.0</spring-boot.version>
-        <spring-data-envers.version>3.1.0</spring-data-envers.version>
-        <spring-framework.version>6.0.9</spring-framework.version> <!-- Keep in sync with boot -->
+        <spring-boot.version>3.2.5</spring-boot.version>
+        <spring-data-envers.version>3.2.5</spring-data-envers.version>
+        <spring-framework.version>6.1.6</spring-framework.version> <!-- Keep in sync with boot -->
         <spring-plugin-core.version>3.0.0</spring-plugin-core.version>
         <start-class></start-class> <!-- keep it empty, set by actual boot module -->
 
@@ -567,9 +565,9 @@
         <aspectj-maven-plugin.version>1.14.0</aspectj-maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
         <jib-maven-plugin.version>3.2.1</jib-maven-plugin.version>
-        <git-commit-id-maven-plugin.version>5.0.0</git-commit-id-maven-plugin.version> <!-- Keep in sync with boot -->
+        <git-commit-id-maven-plugin.version>6.0.0</git-commit-id-maven-plugin.version> <!-- Keep in sync with boot -->
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version> <!-- Keep in sync with boot -->
-        <maven-enforcer-plugin.version>3.3.0</maven-enforcer-plugin.version> <!-- Keep in sync with boot -->
+        <maven-enforcer-plugin.version>3.4.1</maven-enforcer-plugin.version> <!-- Keep in sync with boot -->
         <maven-failsafe-plugin.version>3.1.2</maven-failsafe-plugin.version>
         <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
         <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version> <!-- Keep in sync with boot -->
@@ -578,11 +576,11 @@
         <maven-release-plugin.version>3.0.1</maven-release-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version> <!-- Keep in sync with boot -->
         <maven-scm-publish-plugin.version>3.1.0</maven-scm-publish-plugin.version>
-        <maven-site-plugin.version>4.0.0-M8</maven-site-plugin.version>
-        <maven-source-plugin.version>3.2.1</maven-source-plugin.version> <!-- Keep in sync with boot -->
-        <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
-        <maven-surefire-report-plugin.version>3.1.2</maven-surefire-report-plugin.version>
-        <versions-maven-plugin.version>2.15.0</versions-maven-plugin.version> <!-- Keep in sync with boot -->
+        <maven-site-plugin.version>4.0.0-M13</maven-site-plugin.version>
+        <maven-source-plugin.version>3.3.1</maven-source-plugin.version> <!-- Keep in sync with boot -->
+        <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version> <!-- Keep in sync with boot -->
+        <maven-surefire-report-plugin.version>3.2.5</maven-surefire-report-plugin.version>
+        <versions-maven-plugin.version>2.16.2</versions-maven-plugin.version> <!-- Keep in sync with boot -->
         <wagon-ftp.version>3.4.3</wagon-ftp.version>
         <wagon-ssh.version>3.4.3</wagon-ssh.version>
     </properties>
@@ -755,9 +753,6 @@
                             <image>docker.io/openwms/${project.artifactId}:latest</image>
                         </to>
                         <container>
-                            <jvmFlags>
-                                <jvmFlag>-Xss512k</jvmFlag>
-                            </jvmFlags>
                             <useCurrentTimestamp>true</useCurrentTimestamp>
                         </container>
                     </configuration>
@@ -1061,30 +1056,6 @@
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-core</artifactId>
                 <version>${logback.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-collections</groupId>
-                <artifactId>commons-collections</artifactId>
-                <version>${commons-collections.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.dozermapper</groupId>
-                <artifactId>dozer-core</artifactId>
-                <version>${dozer.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.slf4j</groupId>
-                        <artifactId>slf4j-api</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.slf4j</groupId>
-                        <artifactId>slf4j-log4j12</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.slf4j</groupId>
-                        <artifactId>jcl-over-slf4j</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
             <dependency>
                 <groupId>com.querydsl</groupId>
