@@ -548,6 +548,7 @@
         <commons-collections.version>3.2.2</commons-collections.version> <!-- This is bound to Dozer / Eureka Client -->
         <dozer.version>6.5.2</dozer.version>
         <feign.version>11.10</feign.version> <!-- Keep in sync with spring-cloud-openfeign-dependencies -->
+        <jolokia-core.version>1.7.2</jolokia-core.version>
         <logstash-logback-encoder.version>7.3</logstash-logback-encoder.version>
         <logback.version>1.4.7</logback.version> <!-- Keep in sync with boot -->
         <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
@@ -1167,6 +1168,11 @@
                 <groupId>org.aspectj</groupId>
                 <artifactId>aspectjtools</artifactId>
                 <version>${aspectj-tools.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jolokia</groupId>
+                <artifactId>jolokia-core</artifactId>
+                <version>${jolokia-core.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.mapstruct</groupId>
