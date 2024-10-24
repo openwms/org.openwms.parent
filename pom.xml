@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.sonatype.oss</groupId>
@@ -568,7 +568,7 @@
         <git-commit-id-maven-plugin.version>6.0.0</git-commit-id-maven-plugin.version> <!-- Keep in sync with boot -->
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version> <!-- Keep in sync with boot -->
         <maven-enforcer-plugin.version>3.4.1</maven-enforcer-plugin.version> <!-- Keep in sync with boot -->
-        <maven-failsafe-plugin.version>3.1.2</maven-failsafe-plugin.version>
+        <maven-failsafe-plugin.version>3.1.2</maven-failsafe-plugin.version> <!-- Keep in sync with boot -->
         <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
         <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version> <!-- Keep in sync with boot -->
         <maven-javadoc-plugin.version>3.4.0</maven-javadoc-plugin.version>
@@ -768,7 +768,6 @@
                         <source>${java.version}</source>
                         <target>${java.version}</target>
                         <fork>true</fork>
-                        <optimize>true</optimize>
                         <parameters>true</parameters>
                         <release>${java.version}</release>
                     </configuration>
