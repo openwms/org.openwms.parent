@@ -11,7 +11,7 @@
     </parent>
     <groupId>org.openwms</groupId>
     <artifactId>org.openwms.parent</artifactId>
-    <version>25</version>
+    <version>25.1</version>
     <packaging>pom</packaging>
     <name>OpenWMS.org Parent Project</name>
     <description>OpenWMS.org is an open source warehouse management software</description>
@@ -584,6 +584,7 @@
         <versions-maven-plugin.version>2.10.0</versions-maven-plugin.version> <!-- Keep in sync with boot -->
         <wagon-ftp.version>3.4.3</wagon-ftp.version>
         <wagon-ssh.version>3.4.3</wagon-ssh.version>
+        <org.openwms.core.test.arch.version>1.0.0-SNAPSHOT</org.openwms.core.test.arch.version>
     </properties>
 
     <reporting>
@@ -754,9 +755,6 @@
                             <image>docker.io/openwms/${project.artifactId}:latest</image>
                         </to>
                         <container>
-                            <jvmFlags>
-                                <jvmFlag>-Xss512k</jvmFlag>
-                            </jvmFlags>
                             <useCurrentTimestamp>true</useCurrentTimestamp>
                         </container>
                     </configuration>
@@ -767,7 +765,7 @@
                     <configuration>
                         <forceJavacCompilerUse>true</forceJavacCompilerUse>
                         <debug>${debug.info}</debug>
-                        <enablePreview>true</enablePreview>
+                        <enablePreview>false</enablePreview>
                         <encoding>${project.build.sourceEncoding}</encoding>
                         <source>${java.version}</source>
                         <target>${java.version}</target>
@@ -882,8 +880,12 @@
                             <exclude>**/Abstract*.java</exclude>
                             <exclude>**/*Tests.java</exclude>
                         </excludes>
+                        <dependenciesToScan>
+                            <dependency>org.openwms:org.openwms.core.test.arch</dependency>
+                        </dependenciesToScan>
                         <includes>
                             <include>**/*Test.java</include>
+                            <include>**/*Rules.java</include>
                         </includes>
                     </configuration>
                 </plugin>
@@ -1108,25 +1110,8 @@
             </dependency>
             <dependency>
                 <groupId>com.tngtech.archunit</groupId>
-                <artifactId>archunit-junit5-engine</artifactId>
+                <artifactId>archunit-junit5</artifactId>
                 <version>${archunit.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <!-- Depends on the JUnit Jupiter version used -->
-                        <groupId>org.junit.platform</groupId>
-                        <artifactId>junit-platform-engine</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <!-- Newer version comes with junit-jupiter-api -->
-                        <groupId>org.apiguardian</groupId>
-                        <artifactId>apiguardian-api</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <!-- Newer version comes with junit-jupiter-api -->
-                        <groupId>org.opentest4j</groupId>
-                        <artifactId>opentest4j</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
             <dependency>
                 <groupId>io.github.openfeign</groupId>
@@ -1180,6 +1165,11 @@
                 <version>${org.mapstruct.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.openwms</groupId>
+                <artifactId>org.openwms.core.test.arch</artifactId>
+                <version>${org.openwms.core.test.arch.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-aspects</artifactId>
                 <version>${spring-framework.version}</version>
@@ -1218,7 +1208,12 @@
         </dependency>
         <dependency>
             <groupId>com.tngtech.archunit</groupId>
-            <artifactId>archunit-junit5-engine</artifactId>
+            <artifactId>archunit-junit5</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.openwms</groupId>
+            <artifactId>org.openwms.core.test.arch</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
