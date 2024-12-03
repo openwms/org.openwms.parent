@@ -11,7 +11,7 @@
     </parent>
     <groupId>org.openwms</groupId>
     <artifactId>org.openwms.parent</artifactId>
-    <version>26</version>
+    <version>27</version>
     <packaging>pom</packaging>
     <name>OpenWMS.org Parent Project</name>
     <description>OpenWMS.org is an open source warehouse management software</description>
@@ -203,7 +203,7 @@
             <id>coverage</id>
             <properties>
                 <asciidoc.skip>true</asciidoc.skip>
-                <enforcer.skip>true</enforcer.skip>
+                <enforcer.skip>false</enforcer.skip>
                 <sonar.coverage.jacoco.xmlReportPaths>${project.reporting.outputDirectory}/jacoco-merged-test-coverage-report/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
                 <sonar.host.url>https://sonarcloud.io</sonar.host.url>
                 <sonar.java.binaries>target/classes</sonar.java.binaries>
@@ -540,22 +540,22 @@
         <surefireArgs>-Dspring.profiles.active=TEST</surefireArgs>
 
         <!-- Dependency versions -->
-        <ameba-lib.version>4.0-SNAPSHOT</ameba-lib.version>
+        <ameba-lib.version>4.1-SNAPSHOT</ameba-lib.version>
         <apiguardian-api.version>1.1.2</apiguardian-api.version>
         <archunit.version>0.22.0</archunit.version>
-        <aspectj.version>1.9.22</aspectj.version> <!-- Keep in sync with boot -->
-        <aspectj-tools.version>1.9.22</aspectj-tools.version>
+        <aspectj.version>1.9.22.1</aspectj.version> <!-- Keep in sync with boot -->
+        <aspectj-tools.version>1.9.22.1</aspectj-tools.version>
         <feign.version>13.2.1</feign.version> <!-- Keep in sync with spring-cloud-openfeign-dependencies -->
         <jolokia-core.version>1.7.2</jolokia-core.version>
         <logstash-logback-encoder.version>7.4</logstash-logback-encoder.version>
-        <logback.version>1.4.14</logback.version> <!-- Keep in sync with boot -->
+        <logback.version>1.5.11</logback.version> <!-- Keep in sync with boot -->
         <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
-        <postgresql.version>42.6.2</postgresql.version> <!-- Keep in sync with Boot -->
+        <postgresql.version>42.7.4</postgresql.version> <!-- Keep in sync with Boot -->
         <querydsl.version>5.1.0</querydsl.version>
 
-        <spring-boot.version>3.2.5</spring-boot.version>
-        <spring-data-envers.version>3.2.5</spring-data-envers.version>
-        <spring-framework.version>6.1.6</spring-framework.version> <!-- Keep in sync with boot -->
+        <spring-boot.version>3.3.5</spring-boot.version>
+        <spring-data-envers.version>3.3.5</spring-data-envers.version>
+        <spring-framework.version>6.1.14</spring-framework.version> <!-- Keep in sync with boot -->
         <spring-plugin-core.version>3.0.0</spring-plugin-core.version>
         <start-class></start-class> <!-- keep it empty, set by actual boot module -->
 
@@ -565,12 +565,12 @@
         <aspectj-maven-plugin.version>1.14.0</aspectj-maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
         <jib-maven-plugin.version>3.2.1</jib-maven-plugin.version>
-        <git-commit-id-maven-plugin.version>6.0.0</git-commit-id-maven-plugin.version> <!-- Keep in sync with boot -->
-        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version> <!-- Keep in sync with boot -->
+        <git-commit-id-maven-plugin.version>8.0.2</git-commit-id-maven-plugin.version> <!-- Keep in sync with boot -->
+        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version> <!-- Keep in sync with boot -->
         <maven-enforcer-plugin.version>3.4.1</maven-enforcer-plugin.version> <!-- Keep in sync with boot -->
-        <maven-failsafe-plugin.version>3.1.2</maven-failsafe-plugin.version> <!-- Keep in sync with boot -->
+        <maven-failsafe-plugin.version>3.2.5</maven-failsafe-plugin.version> <!-- Keep in sync with boot -->
         <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
-        <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version> <!-- Keep in sync with boot -->
+        <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version> <!-- Keep in sync with boot -->
         <maven-javadoc-plugin.version>3.4.0</maven-javadoc-plugin.version>
         <maven-project-info-reports-plugin.version>3.4.4</maven-project-info-reports-plugin.version>
         <maven-release-plugin.version>3.0.1</maven-release-plugin.version>
