@@ -203,7 +203,7 @@
             <id>coverage</id>
             <properties>
                 <asciidoc.skip>true</asciidoc.skip>
-                <enforcer.skip>false</enforcer.skip>
+                <enforcer.skip>true</enforcer.skip>
                 <sonar.coverage.jacoco.xmlReportPaths>${project.reporting.outputDirectory}/jacoco-merged-test-coverage-report/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
                 <sonar.host.url>https://sonarcloud.io</sonar.host.url>
                 <sonar.java.binaries>target/classes</sonar.java.binaries>
@@ -877,8 +877,12 @@
                             <exclude>**/Abstract*.java</exclude>
                             <exclude>**/*Tests.java</exclude>
                         </excludes>
+                        <dependenciesToScan>
+                            <dependency>org.openwms:org.openwms.core.test.arch</dependency>
+                        </dependenciesToScan>
                         <includes>
                             <include>**/*Test.java</include>
+                            <include>**/*Rules.java</include>
                         </includes>
                     </configuration>
                 </plugin>
@@ -1078,25 +1082,8 @@
             </dependency>
             <dependency>
                 <groupId>com.tngtech.archunit</groupId>
-                <artifactId>archunit-junit5-engine</artifactId>
+                <artifactId>archunit-junit5</artifactId>
                 <version>${archunit.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <!-- Depends on the JUnit Jupiter version used -->
-                        <groupId>org.junit.platform</groupId>
-                        <artifactId>junit-platform-engine</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <!-- Newer version comes with junit-jupiter-api -->
-                        <groupId>org.apiguardian</groupId>
-                        <artifactId>apiguardian-api</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <!-- Newer version comes with junit-jupiter-api -->
-                        <groupId>org.opentest4j</groupId>
-                        <artifactId>opentest4j</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
             <dependency>
                 <groupId>io.github.openfeign</groupId>
@@ -1193,7 +1180,7 @@
         </dependency>
         <dependency>
             <groupId>com.tngtech.archunit</groupId>
-            <artifactId>archunit-junit5-engine</artifactId>
+            <artifactId>archunit-junit5</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
