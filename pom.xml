@@ -19,8 +19,8 @@
     <inceptionYear>2005</inceptionYear>
 
     <issueManagement>
-        <system>JIRA</system>
-        <url>https://openwms.atlassian.net/browse</url>
+        <system>GitHub</system>
+        <url>https://github.com/openwms/${project.artifactId}/issues</url>
     </issueManagement>
 
     <licenses>
@@ -46,14 +46,15 @@
         <site>
             <id>site</id>
             <name>OpenWMS.org WebSite</name>
-            <url>scm:git:git@github.com:openwms/org.openwms.git</url>
+            <url>scm:git:git@github.com:openwms/${project.artifactId}.git</url>
         </site>
     </distributionManagement>
 
     <scm>
-        <url>https://github.com/openwms/org.openwms</url>
-        <connection>scm:git:https://github.com/openwms/org.openwms.git</connection>
-        <developerConnection>scm:git:https://github.com:openwms/org.openwms.git</developerConnection>
+        <url>https://github.com/openwms/${project.artifactId}</url>
+        <connection>scm:git:https://github.com/openwms/${project.artifactId}.git</connection>
+        <developerConnection>scm:git:https://github.com/openwms/${project.artifactId}.git</developerConnection>
+        <tag>HEAD</tag>
     </scm>
 
     <organization>
@@ -187,7 +188,7 @@
 
     <ciManagement>
         <system>GitHub</system>
-        <url>https://github.com/openwms/org.openwms/actions</url>
+        <url>https://github.com/openwms/${project.artifactId}/actions</url>
         <notifiers>
             <notifier>
                 <type>mail</type>
@@ -217,7 +218,7 @@
                     <plugin>
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <configuration>
-                            <argLine>@{argLine} @{failsafe.jacoco.args}</argLine>
+                            <argLine>@{argLine} @{failsafe.jacoco.args} -javaagent:${org.mockito:mockito-core:jar}</argLine>
                             <includes>
                                 <include>**/*IT.java</include>
                                 <include>**/*Documentation.java</include>
@@ -242,7 +243,7 @@
                     <plugin>
                         <artifactId>maven-surefire-plugin</artifactId>
                         <configuration>
-                            <argLine>@{argLine} @{surefire.jacoco.args}</argLine>
+                            <argLine>@{argLine} @{surefire.jacoco.args} -javaagent:${org.mockito:mockito-core:jar}</argLine>
                             <!-- Never set a forkCount to 0 bc. of Jacoco -->
                             <excludes>
                                 <exclude>**/Abstract*.java</exclude>
@@ -432,7 +433,7 @@
             <id>schemagen</id>
             <!-- Used to create an ERD schema diagram -->
             <properties>
-                <schemaspy-maven-plugin.version>5.1.0</schemaspy-maven-plugin.version>
+                <schemaspy-maven-plugin.version>5.3.0</schemaspy-maven-plugin.version>
                 <surefireArgs>-Dspring.profiles.active=ASYNCHRONOUS,TEST,TESTPG</surefireArgs>
                 <schemagen.outputDirectory>${project.build.directory}/site/${project.version}</schemagen.outputDirectory>
                 <M2_REPO_DIR>/home/runner/.m2/repository</M2_REPO_DIR>
@@ -521,7 +522,7 @@
         -Dfile.encoding=${project.build.sourceEncoding} ${surefireArgs}]]>
         </argLine>
         <ci.buildNumber>MANUAL</ci.buildNumber>
-        <debug.info>true</debug.info>
+        <debug.info>false</debug.info>
         <!-- Disable lookup of dependency locations in the maven-project-info-reports-plugin -->
         <dependency.locations.enabled>false</dependency.locations.enabled>
         <documentation.dir>${project.build.directory}</documentation.dir>
@@ -532,6 +533,7 @@
         <javadoc.output.dir>${project.reporting.outputDirectory}/apidocs/${project.version}</javadoc.output.dir> <!-- Javadoc plugin config -->
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.version>3.8.5</maven.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <scmpublish.content>${project.build.directory}/site</scmpublish.content>
         <scmuser></scmuser>
@@ -545,44 +547,44 @@
         <archunit.version>0.22.0</archunit.version>
         <aspectj.version>1.9.22.1</aspectj.version> <!-- Keep in sync with boot -->
         <aspectj-tools.version>1.9.22.1</aspectj-tools.version>
-        <feign.version>13.2.1</feign.version> <!-- Keep in sync with spring-cloud-openfeign-dependencies -->
+        <feign.version>13.5</feign.version> <!-- Keep in sync with spring-cloud-openfeign-dependencies -->
         <jolokia-core.version>1.7.2</jolokia-core.version>
-        <logstash-logback-encoder.version>7.4</logstash-logback-encoder.version>
-        <logback.version>1.5.11</logback.version> <!-- Keep in sync with boot -->
-        <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
+        <logstash-logback-encoder.version>8.0</logstash-logback-encoder.version>
+        <logback.version>1.5.12</logback.version> <!-- Keep in sync with boot -->
+        <org.mapstruct.version>1.6.3</org.mapstruct.version>
         <postgresql.version>42.7.4</postgresql.version> <!-- Keep in sync with Boot -->
         <querydsl.version>5.1.0</querydsl.version>
 
-        <spring-boot.version>3.3.5</spring-boot.version>
-        <spring-data-envers.version>3.3.5</spring-data-envers.version>
-        <spring-framework.version>6.1.14</spring-framework.version> <!-- Keep in sync with boot -->
+        <spring-boot.version>3.4.0</spring-boot.version>
+        <spring-data-envers.version>3.4.0</spring-data-envers.version>
+        <spring-framework.version>6.2.0</spring-framework.version> <!-- Keep in sync with boot -->
         <spring-plugin-core.version>3.0.0</spring-plugin-core.version>
         <start-class></start-class> <!-- keep it empty, set by actual boot module -->
 
         <!--   Plugin versions   -->
         <apt-maven-plugin.version>1.1.3</apt-maven-plugin.version>
-        <asciidoctor-maven-plugin.version>2.2.2</asciidoctor-maven-plugin.version>
-        <aspectj-maven-plugin.version>1.14.0</aspectj-maven-plugin.version>
-        <jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
-        <jib-maven-plugin.version>3.2.1</jib-maven-plugin.version>
-        <git-commit-id-maven-plugin.version>8.0.2</git-commit-id-maven-plugin.version> <!-- Keep in sync with boot -->
+        <asciidoctor-maven-plugin.version>3.1.1</asciidoctor-maven-plugin.version>
+        <aspectj-maven-plugin.version>1.15.0</aspectj-maven-plugin.version>
+        <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
+        <jib-maven-plugin.version>3.4.4</jib-maven-plugin.version>
+        <git-commit-id-maven-plugin.version>9.0.1</git-commit-id-maven-plugin.version> <!-- Keep in sync with boot -->
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version> <!-- Keep in sync with boot -->
-        <maven-enforcer-plugin.version>3.4.1</maven-enforcer-plugin.version> <!-- Keep in sync with boot -->
-        <maven-failsafe-plugin.version>3.2.5</maven-failsafe-plugin.version> <!-- Keep in sync with boot -->
-        <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
+        <maven-enforcer-plugin.version>3.5.0</maven-enforcer-plugin.version> <!-- Keep in sync with boot -->
+        <maven-failsafe-plugin.version>3.5.2</maven-failsafe-plugin.version> <!-- Keep in sync with boot -->
+        <maven-gpg-plugin.version>3.2.7</maven-gpg-plugin.version>
         <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version> <!-- Keep in sync with boot -->
-        <maven-javadoc-plugin.version>3.4.0</maven-javadoc-plugin.version>
-        <maven-project-info-reports-plugin.version>3.4.4</maven-project-info-reports-plugin.version>
-        <maven-release-plugin.version>3.0.1</maven-release-plugin.version>
+        <maven-javadoc-plugin.version>3.11.1</maven-javadoc-plugin.version>
+        <maven-project-info-reports-plugin.version>3.8.0</maven-project-info-reports-plugin.version>
+        <maven-release-plugin.version>3.1.1</maven-release-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version> <!-- Keep in sync with boot -->
-        <maven-scm-publish-plugin.version>3.1.0</maven-scm-publish-plugin.version>
-        <maven-site-plugin.version>4.0.0-M13</maven-site-plugin.version>
+        <maven-scm-publish-plugin.version>3.3.0</maven-scm-publish-plugin.version>
+        <maven-site-plugin.version>4.0.0-M16</maven-site-plugin.version>
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version> <!-- Keep in sync with boot -->
-        <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version> <!-- Keep in sync with boot -->
-        <maven-surefire-report-plugin.version>3.2.5</maven-surefire-report-plugin.version>
-        <versions-maven-plugin.version>2.16.2</versions-maven-plugin.version> <!-- Keep in sync with boot -->
-        <wagon-ftp.version>3.4.3</wagon-ftp.version>
-        <wagon-ssh.version>3.4.3</wagon-ssh.version>
+        <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version> <!-- Keep in sync with boot -->
+        <maven-surefire-report-plugin.version>3.5.2</maven-surefire-report-plugin.version>
+        <versions-maven-plugin.version>2.17.1</versions-maven-plugin.version> <!-- Keep in sync with boot -->
+        <wagon-ftp.version>3.5.3</wagon-ftp.version>
+        <wagon-ssh.version>3.5.3</wagon-ssh.version>
     </properties>
 
     <reporting>
@@ -761,7 +763,6 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${maven-compiler-plugin.version}</version>
                     <configuration>
-                        <forceJavacCompilerUse>true</forceJavacCompilerUse>
                         <debug>${debug.info}</debug>
                         <enablePreview>false</enablePreview>
                         <encoding>${project.build.sourceEncoding}</encoding>
@@ -773,23 +774,15 @@
                     </configuration>
                 </plugin>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
                     <version>${maven-enforcer-plugin.version}</version>
-                    <configuration>
-                        <rules>
-                            <requireJavaVersion>
-                                <message>At least a JDK in version ${java.version} is required.</message>
-                                <version>${java.version}</version>
-                            </requireJavaVersion>
-                            <DependencyConvergence/>
-                        </rules>
-                    </configuration>
                 </plugin>
                 <plugin>
                     <artifactId>maven-failsafe-plugin</artifactId>
                     <version>${maven-failsafe-plugin.version}</version>
                     <configuration>
-                        <argLine>@{argLine}</argLine>
+                        <argLine>@{argLine} -javaagent:${org.mockito:mockito-core:jar}</argLine>
                         <includes>
                             <include>**/*IT.java</include>
                             <include>**/*Documentation.java</include>
@@ -1028,8 +1021,42 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <!-- see https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#0.3 -->
+                            <goal>properties</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
                 <version>${maven-enforcer-plugin.version}</version>
+                <executions>
+                    <!-- This section must be kept here and not in management -->
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <message>Maven in at least version ${maven.version} is required.</message>
+                                    <version>3.8.5</version>
+                                </requireMavenVersion>
+                                <requireJavaVersion>
+                                    <message>At least a JDK in version ${java.version} is required.</message>
+                                    <version>${java.version}</version>
+                                </requireJavaVersion>
+                                <DependencyConvergence/>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -1039,6 +1066,7 @@
             <plugin>
                 <groupId>io.github.git-commit-id</groupId>
                 <artifactId>git-commit-id-maven-plugin</artifactId>
+                <version>${git-commit-id-maven-plugin.version}</version>
             </plugin>
         </plugins>
     </build>
@@ -1183,5 +1211,48 @@
             <artifactId>archunit-junit5</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </pluginRepository>
+        <pluginRepository>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Snapshot Repository</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </pluginRepository>
+    </pluginRepositories>
 </project>
