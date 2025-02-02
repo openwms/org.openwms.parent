@@ -398,6 +398,8 @@
         <profile>
             <id>release-project</id>
             <properties>
+                <url>https://github.com/openwms/${project.artifactId}</url>
+                <connection>scm:git:https://github.com/openwms/${project.artifactId}.git</connection>
                 <developerConnectionUrl>scm:git:https://openwms@github.com/openwms/${project.artifactId}.git</developerConnectionUrl>
                 <scmpublish.pubScmUrl>scm:git:https://openwms@github.com/openwms/${project.artifactId}.git</scmpublish.pubScmUrl>
             </properties>
@@ -580,7 +582,7 @@
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version> <!-- Keep in sync with boot -->
         <maven-scm-publish-plugin.version>3.3.0</maven-scm-publish-plugin.version>
         <maven-site-plugin.version>3.21.0</maven-site-plugin.version> <!-- Must fit to maven-fluido-skin version -->
-        <maven-source-plugin.version>3.3.1</maven-source-plugin.version> <!-- Keep in sync with boot -->
+        <maven-source-plugin.version>3.2.1</maven-source-plugin.version> <!-- Fix to 3.2.1. Keep in sync with boot -->
         <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version> <!-- Keep in sync with boot -->
         <maven-surefire-report-plugin.version>3.5.2</maven-surefire-report-plugin.version>
         <versions-maven-plugin.version>2.17.1</versions-maven-plugin.version> <!-- Keep in sync with boot -->
