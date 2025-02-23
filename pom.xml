@@ -11,7 +11,7 @@
     </parent>
     <groupId>org.openwms</groupId>
     <artifactId>org.openwms.parent</artifactId>
-    <version>27.2</version>
+    <version>27.3</version>
     <packaging>pom</packaging>
     <name>OpenWMS.org Parent Project</name>
     <description>OpenWMS.org is an open source warehouse management software</description>
@@ -51,7 +51,7 @@
     </distributionManagement>
 
     <scm>
-        <url>https://github.com/openwms/${project.artifactId}</url>
+        <url>https://github.com/openwms</url>
         <connection>scm:git:https://github.com/openwms/${project.artifactId}.git</connection>
         <developerConnection>scm:git:https://github.com/openwms/${project.artifactId}.git</developerConnection>
         <tag>HEAD</tag>
@@ -70,7 +70,7 @@
             <url>https://openwms.github.io/</url>
             <organization>Interface21.io</organization>
             <organizationUrl>https://www.interface21.io</organizationUrl>
-            <timezone>+2</timezone>
+            <timezone>+1</timezone>
             <roles>
                 <role>Project Lead</role>
                 <role>Architect</role>
@@ -97,9 +97,9 @@
             <name>Frank Lauer</name>
             <email>flauer99@users.sourceforge.net</email>
             <url>https://sourceforge.net/users/flauer99</url>
-            <organization>Aberle GmbH</organization>
-            <organizationUrl>https://www.a-s.de</organizationUrl>
-            <timezone>+2</timezone>
+            <organization>Koerber AG</organization>
+            <organizationUrl>https://www.koerber.com</organizationUrl>
+            <timezone>+1</timezone>
             <roles>
                 <role>Java Developer</role>
                 <role>Site Master</role>
@@ -111,7 +111,7 @@
             <url>https://sourceforge.net/users/smudo99</url>
             <organization>SAP</organization>
             <organizationUrl>https://www.sap.com</organizationUrl>
-            <timezone>+2</timezone>
+            <timezone>+1</timezone>
             <roles>
                 <role>Java Developer</role>
             </roles>
@@ -122,7 +122,7 @@
             <url>https://sourceforge.net/users/flogy</url>
             <organization>Swisslog AG</organization>
             <organizationUrl>https://www.swisslog.com</organizationUrl>
-            <timezone>+2</timezone>
+            <timezone>+1</timezone>
             <roles>
                 <role>Developer</role>
                 <role>Supporter</role>
@@ -132,7 +132,9 @@
             <name>Mischa Farbstein</name>
             <email>mischazurich@users.sourceforge.net</email>
             <url>https://sourceforge.net/users/mischazurich</url>
-            <timezone>+2</timezone>
+            <organization>Accenture AG</organization>
+            <organizationUrl>https://www.accenture.com</organizationUrl>
+            <timezone>+1</timezone>
             <roles>
                 <role>Developer</role>
                 <role>Moderator</role>
@@ -142,7 +144,9 @@
             <name>Michael Rudiger</name>
             <email>rudiger@openwms.org</email>
             <url>https://sourceforge.net/users/jarhell</url>
-            <timezone>+2</timezone>
+            <organization>Swisslog AG</organization>
+            <organizationUrl>https://www.swisslog.com</organizationUrl>
+            <timezone>+1</timezone>
             <roles>
                 <role>Developer</role>
             </roles>
@@ -150,7 +154,9 @@
         <contributor>
             <name>Markus Schneider</name>
             <email>markusschneider0207@gmail.com</email>
-            <timezone>+2</timezone>
+            <organization>BMW AG</organization>
+            <organizationUrl>https://www.bmw.com</organizationUrl>
+            <timezone>+1</timezone>
             <roles>
                 <role>Developer</role>
             </roles>
