@@ -442,7 +442,7 @@
             <id>schemagen</id>
             <!-- Used to create an ERD schema diagram -->
             <properties>
-                <schemaspy-maven-plugin.version>5.3.0</schemaspy-maven-plugin.version>
+                <schemaspy-maven-plugin.version>5.3.1</schemaspy-maven-plugin.version>
                 <surefireArgs>-Dspring.profiles.active=ASYNCHRONOUS,TEST,TESTPG</surefireArgs>
                 <schemagen.outputDirectory>${project.build.directory}/site/${project.version}</schemagen.outputDirectory>
                 <M2_REPO_DIR>/home/runner/.m2/repository</M2_REPO_DIR>
@@ -720,37 +720,6 @@
                     <groupId>com.mysema.maven</groupId>
                     <artifactId>apt-maven-plugin</artifactId>
                     <version>${apt-maven-plugin.version}</version>
-                    <executions>
-                        <execution>
-                            <phase>generate-sources</phase>
-                            <goals>
-                                <goal>process</goal>
-                            </goals>
-                            <configuration>
-                                <outputDirectory>target/generated-sources/jpa</outputDirectory>
-                                <options>
-                                    <querydsl.entityAccessors>true</querydsl.entityAccessors>
-                                    <querydsl.listAccessors>true</querydsl.listAccessors>
-                                </options>
-                                <processors>
-                                    <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
-                                </processors>
-                            </configuration>
-                        </execution>
-                    </executions>
-                    <dependencies>
-                        <dependency>
-                            <groupId>com.querydsl</groupId>
-                            <artifactId>querydsl-apt</artifactId>
-                            <version>${querydsl.version}</version>
-                        </dependency>
-                        <dependency>
-                            <groupId>com.querydsl</groupId>
-                            <artifactId>querydsl-jpa</artifactId>
-                            <classifier>apt</classifier>
-                            <version>${querydsl.version}</version>
-                        </dependency>
-                    </dependencies>
                 </plugin>
                 <plugin>
                     <groupId>com.google.cloud.tools</groupId>
@@ -1255,6 +1224,17 @@
             </snapshots>
             <releases>
                 <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Snapshot Repository</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
             </releases>
         </repository>
     </repositories>
