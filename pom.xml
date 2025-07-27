@@ -590,7 +590,7 @@
         <maven-scm-publish-plugin.version>3.3.0</maven-scm-publish-plugin.version>
         <maven-site-plugin.version>3.21.0</maven-site-plugin.version> <!-- Must fit to maven-fluido-skin version -->
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version> <!-- Fix to 3.2.1. Keep in sync with boot -->
-        <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version> <!-- Keep in sync with boot -->
+        <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version> <!-- Keep in sync with boot -->
         <maven-surefire-report-plugin.version>3.5.3</maven-surefire-report-plugin.version>
         <versions-maven-plugin.version>2.18.0</versions-maven-plugin.version> <!-- Keep in sync with boot -->
         <wagon-ftp.version>3.5.3</wagon-ftp.version>
@@ -1222,17 +1222,6 @@
 
     <repositories>
         <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
-        <repository>
             <id>ossrh-staging-api</id>
             <name>OSSRH Staging Repository</name>
             <url>https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/</url>
@@ -1240,23 +1229,12 @@
                 <enabled>true</enabled>
             </snapshots>
             <releases>
-                <enabled>false</enabled>
+                <enabled>true</enabled>
             </releases>
         </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </pluginRepository>
-        <pluginRepository>
             <id>ossrh-staging-api</id>
             <name>OSSRH Staging Repository</name>
             <url>https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/</url>
@@ -1264,7 +1242,7 @@
                 <enabled>true</enabled>
             </snapshots>
             <releases>
-                <enabled>false</enabled>
+                <enabled>true</enabled>
             </releases>
         </pluginRepository>
     </pluginRepositories>
