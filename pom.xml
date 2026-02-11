@@ -11,7 +11,7 @@
     </parent>
     <groupId>org.openwms</groupId>
     <artifactId>org.openwms.parent</artifactId>
-    <version>27.7</version>
+    <version>27.7.1</version>
     <packaging>pom</packaging>
     <name>OpenWMS.org Parent Project</name>
     <description>OpenWMS.org is an open source warehouse management software</description>
@@ -466,6 +466,12 @@
                     <plugin>
                         <groupId>org.springframework.boot</groupId>
                         <artifactId>spring-boot-maven-plugin</artifactId>
+                        <configuration>
+                            <environmentVariables>
+                                <springdoc.api-docs.enabled>true</springdoc.api-docs.enabled>
+                                <springdoc.swagger-ui.enabled>true</springdoc.swagger-ui.enabled>
+                            </environmentVariables>
+                        </configuration>
                         <executions>
                             <execution>
                                 <id>pre-integration-test</id>
