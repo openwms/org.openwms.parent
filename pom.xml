@@ -456,6 +456,79 @@
             </build>
         </profile>
         <profile>
+            <id>openapi</id>
+            <properties>
+                <PORT>33000</PORT>
+                <springdoc-openapi-maven-plugin.version>1.5</springdoc-openapi-maven-plugin.version>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <configuration>
+                            <environmentVariables>
+                                <springdoc.api-docs.enabled>true</springdoc.api-docs.enabled>
+                                <springdoc.swagger-ui.enabled>true</springdoc.swagger-ui.enabled>
+                            </environmentVariables>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>pre-integration-test</id>
+                                <goals>
+                                    <goal>start</goal>
+                                </goals>
+                                <configuration>
+                                    <environmentVariables>
+                                        <PORT>${PORT}</PORT>
+                                    </environmentVariables>
+                                    <profiles>
+                                        <profile>OPENAPI</profile>
+                                    </profiles>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>post-integration-test</id>
+                                <goals>
+                                    <goal>stop</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.springdoc</groupId>
+                        <artifactId>springdoc-openapi-maven-plugin</artifactId>
+                        <version>${springdoc-openapi-maven-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <phase>integration-test</phase>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <apiDocsUrl>http://localhost:${PORT}/v3/api-docs</apiDocsUrl>
+                            <outputFileName>openapi.json</outputFileName>
+                            <outputDir>${project.build.directory}</outputDir>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springdoc</groupId>
+                    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>com.h2database</groupId>
+                    <artifactId>h2</artifactId>
+                    <scope>runtime</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
             <id>schemagen</id>
             <!-- Used to create an ERD schema diagram -->
             <properties>
@@ -571,21 +644,22 @@
         <ameba-lib.version>4.2.1</ameba-lib.version>
         <apiguardian-api.version>1.1.2</apiguardian-api.version>
         <archunit.version>1.4.1</archunit.version>
-        <aspectj.version>1.9.24</aspectj.version> <!-- Keep in sync with boot -->
-        <aspectj-tools.version>1.9.24</aspectj-tools.version>
+        <aspectj.version>1.9.25.1</aspectj.version> <!-- Keep in sync with boot -->
+        <aspectj-tools.version>1.9.25.1</aspectj-tools.version>
         <feign.version>13.6</feign.version> <!-- Keep in sync with spring-cloud-openfeign-dependencies -->
         <jolokia-core.version>1.7.2</jolokia-core.version>
         <logstash-logback-encoder.version>8.1</logstash-logback-encoder.version>
-        <logback.version>1.5.18</logback.version> <!-- Keep in sync with boot -->
+        <logback.version>1.5.34</logback.version> <!-- Keep in sync with boot -->
         <loki-logback-appender.version>2.0.0</loki-logback-appender.version>
         <org.mapstruct.version>1.6.3</org.mapstruct.version>
-        <postgresql.version>42.7.7</postgresql.version> <!-- Keep in sync with Boot -->
+        <postgresql.version>42.7.11</postgresql.version> <!-- Keep in sync with Boot -->
         <querydsl.version>5.1.0</querydsl.version>
 
-        <spring-boot.version>3.5.6</spring-boot.version>
-        <spring-data-envers.version>3.5.3</spring-data-envers.version>
-        <spring-framework.version>6.2.11</spring-framework.version> <!-- Keep in sync with boot -->
+        <spring-boot.version>4.1.0</spring-boot.version>
+        <spring-data-envers.version>4.1.0</spring-data-envers.version>
+        <spring-framework.version>7.0.8</spring-framework.version> <!-- Keep in sync with boot -->
         <spring-plugin-core.version>3.0.0</spring-plugin-core.version>
+        <springdoc-openapi-bom.version>3.0.3</springdoc-openapi-bom.version> <!-- 3.x line required for Spring Boot 4 / Spring Framework 7 -->
         <start-class></start-class> <!-- keep it empty, set by actual boot module -->
 
         <!--   Plugin versions   -->
@@ -595,22 +669,22 @@
         <central-publishing-maven-plugin.version>0.8.0</central-publishing-maven-plugin.version>
         <jacoco-maven-plugin.version>0.8.13</jacoco-maven-plugin.version>
         <jib-maven-plugin.version>3.4.6</jib-maven-plugin.version>
-        <git-commit-id-maven-plugin.version>9.0.2</git-commit-id-maven-plugin.version> <!-- Keep in sync with boot -->
-        <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version> <!-- Keep in sync with boot -->
-        <maven-enforcer-plugin.version>3.5.0</maven-enforcer-plugin.version> <!-- Keep in sync with boot -->
-        <maven-failsafe-plugin.version>3.5.3</maven-failsafe-plugin.version> <!-- Keep in sync with boot -->
+        <git-commit-id-maven-plugin.version>9.2.0</git-commit-id-maven-plugin.version> <!-- Keep in sync with boot -->
+        <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version> <!-- Keep in sync with boot -->
+        <maven-enforcer-plugin.version>3.6.3</maven-enforcer-plugin.version> <!-- Keep in sync with boot -->
+        <maven-failsafe-plugin.version>3.5.6</maven-failsafe-plugin.version> <!-- Keep in sync with boot -->
         <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
-        <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version> <!-- Keep in sync with boot -->
-        <maven-javadoc-plugin.version>3.11.3</maven-javadoc-plugin.version> <!-- Keep in sync with boot -->
+        <maven-jar-plugin.version>3.5.0</maven-jar-plugin.version> <!-- Keep in sync with boot -->
+        <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version> <!-- Keep in sync with boot -->
         <maven-project-info-reports-plugin.version>3.9.0</maven-project-info-reports-plugin.version>
         <maven-release-plugin.version>3.1.1</maven-release-plugin.version>
-        <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version> <!-- Keep in sync with boot -->
+        <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version> <!-- Keep in sync with boot -->
         <maven-scm-publish-plugin.version>3.3.0</maven-scm-publish-plugin.version>
         <maven-site-plugin.version>3.21.0</maven-site-plugin.version> <!-- Must fit to maven-fluido-skin version -->
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version> <!-- Fix to 3.2.1. Keep in sync with boot -->
-        <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version> <!-- Keep in sync with boot -->
-        <maven-surefire-report-plugin.version>3.5.3</maven-surefire-report-plugin.version>
-        <versions-maven-plugin.version>2.18.0</versions-maven-plugin.version> <!-- Keep in sync with boot -->
+        <maven-surefire-plugin.version>3.5.6</maven-surefire-plugin.version> <!-- Keep in sync with boot -->
+        <maven-surefire-report-plugin.version>3.5.6</maven-surefire-report-plugin.version>
+        <versions-maven-plugin.version>2.21.0</versions-maven-plugin.version> <!-- Keep in sync with boot -->
         <wagon-ftp.version>3.5.3</wagon-ftp.version>
         <wagon-ssh.version>3.5.3</wagon-ssh.version>
     </properties>
@@ -747,7 +821,7 @@
                     <version>${jib-maven-plugin.version}</version>
                     <configuration>
                         <from>
-                            <image>amazoncorretto:21-alpine</image>
+                            <image>bellsoft/liberica-openjre-alpine:25</image>
                         </from>
                         <to>
                             <image>docker.io/openwms/${project.artifactId}:latest</image>
@@ -1189,6 +1263,13 @@
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct-processor</artifactId>
                 <version>${org.mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-bom</artifactId>
+                <version>${springdoc-openapi-bom.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>

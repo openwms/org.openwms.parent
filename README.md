@@ -6,6 +6,6 @@ This project is used as Maven super pom for all other OpenWMS.org modules.
 # Release
 
 ```
-$ mvn clean deploy -Prelease,gpg
+$ mvn clean deploy -Prelease,release-central,gpg
 ```
 
