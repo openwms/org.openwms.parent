@@ -393,7 +393,7 @@
                             <docletArtifact>
                                 <groupId>nl.talsmasoftware</groupId>
                                 <artifactId>umldoclet</artifactId>
-                                <version>2.0.9</version>
+                                <version>${umldoclet.version}</version>
                             </docletArtifact>
                         </configuration>
                     </plugin>
@@ -597,14 +597,6 @@
                     <plugin>
                         <groupId>nl.geodienstencentrum.maven</groupId>
                         <artifactId>schemaspy-maven-plugin</artifactId>
-                        <version>${schemaspy-maven-plugin.version}</version>
-                        <dependencies>
-                            <dependency>
-                                <groupId>org.postgresql</groupId>
-                                <artifactId>postgresql</artifactId>
-                                <version>${postgresql.version}</version>
-                            </dependency>
-                        </dependencies>
                     </plugin>
                 </plugins>
             </build>
@@ -647,7 +639,6 @@
         <aspectj.version>1.9.25.1</aspectj.version> <!-- Keep in sync with boot -->
         <aspectj-tools.version>1.9.25.1</aspectj-tools.version>
         <feign.version>13.6</feign.version> <!-- Keep in sync with spring-cloud-openfeign-dependencies -->
-        <jolokia-support-springboot.version>2.6.0</jolokia-support-springboot.version>
         <logstash-logback-encoder.version>8.1</logstash-logback-encoder.version>
         <logback.version>1.5.34</logback.version> <!-- Keep in sync with boot -->
         <loki-logback-appender.version>2.0.0</loki-logback-appender.version>
@@ -656,7 +647,6 @@
         <querydsl.version>5.1.0</querydsl.version>
 
         <spring-boot.version>4.1.0</spring-boot.version>
-        <spring-data-envers.version>4.1.0</spring-data-envers.version>
         <spring-framework.version>7.0.8</spring-framework.version> <!-- Keep in sync with boot -->
         <spring-plugin-core.version>3.0.0</spring-plugin-core.version>
         <springdoc-openapi-bom.version>3.0.3</springdoc-openapi-bom.version> <!-- 3.x line required for Spring Boot 4 / Spring Framework 7 -->
@@ -681,9 +671,10 @@
         <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version> <!-- Keep in sync with boot -->
         <maven-scm-publish-plugin.version>3.3.0</maven-scm-publish-plugin.version>
         <maven-site-plugin.version>3.21.0</maven-site-plugin.version> <!-- Must fit to maven-fluido-skin version -->
-        <maven-source-plugin.version>3.2.1</maven-source-plugin.version> <!-- Fix to 3.2.1. Keep in sync with boot -->
+        <maven-source-plugin.version>3.2.1</maven-source-plugin.version> <!-- Intentionally pinned to 3.2.1, Boot manages 3.4.0 -->
         <maven-surefire-plugin.version>3.5.6</maven-surefire-plugin.version> <!-- Keep in sync with boot -->
         <maven-surefire-report-plugin.version>3.5.6</maven-surefire-report-plugin.version>
+        <umldoclet.version>2.0.9</umldoclet.version>
         <versions-maven-plugin.version>2.21.0</versions-maven-plugin.version> <!-- Keep in sync with boot -->
         <wagon-ftp.version>3.5.3</wagon-ftp.version>
         <wagon-ssh.version>3.5.3</wagon-ssh.version>
@@ -838,8 +829,6 @@
                         <debug>${debug.info}</debug>
                         <enablePreview>false</enablePreview>
                         <encoding>${project.build.sourceEncoding}</encoding>
-                        <source>${java.version}</source>
-                        <target>${java.version}</target>
                         <fork>true</fork>
                         <parameters>true</parameters>
                         <release>${java.version}</release>
@@ -929,6 +918,10 @@
                     <configuration>
                         <scmBranch>gh-pages</scmBranch>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven-jar-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-site-plugin</artifactId>
@@ -1068,20 +1061,6 @@
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>${jacoco-maven-plugin.version}</version>
-                    <!--executions>
-                        <execution>
-                            <goals>
-                                <goal>prepare-agent</goal>
-                            </goals>
-                        </execution>
-                        <execution>
-                            <id>report</id>
-                            <phase>test</phase>
-                            <goals>
-                                <goal>report</goal>
-                            </goals>
-                        </execution>
-                    </executions-->
                 </plugin>
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
@@ -1107,6 +1086,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
+                <!-- The explicit version must be kept here, otherwise the enforcer 1.2 declared in oss-parent wins -->
                 <version>${maven-enforcer-plugin.version}</version>
                 <executions>
                     <!-- This section must be kept here and not in management -->
@@ -1118,7 +1098,7 @@
                         <configuration>
                             <rules>
                                 <requireMavenVersion>
-                                    <message>Maven in at least version ${maven.version} is required.</message>
+                                    <message>Maven in at least version 3.8.5 is required.</message>
                                     <version>3.8.5</version>
                                 </requireMavenVersion>
                                 <requireJavaVersion>
@@ -1134,12 +1114,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>${maven-jar-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>io.github.git-commit-id</groupId>
                 <artifactId>git-commit-id-maven-plugin</artifactId>
-                <version>${git-commit-id-maven-plugin.version}</version>
             </plugin>
         </plugins>
     </build>
@@ -1250,11 +1228,6 @@
                 <version>${aspectj-tools.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.jolokia</groupId>
-                <artifactId>jolokia-support-springboot</artifactId>
-                <version>${jolokia-support-springboot.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct</artifactId>
                 <version>${org.mapstruct.version}</version>
@@ -1282,11 +1255,6 @@
                 <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.data</groupId>
-                <artifactId>spring-data-envers</artifactId>
-                <version>${spring-data-envers.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.plugin</groupId>
