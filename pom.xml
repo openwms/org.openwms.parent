@@ -641,13 +641,13 @@
         <surefireArgs>-Dspring.profiles.active=TEST</surefireArgs>
 
         <!-- Dependency versions -->
-        <ameba-lib.version>4.2.1</ameba-lib.version>
+        <ameba-lib.version>4.3.0</ameba-lib.version>
         <apiguardian-api.version>1.1.2</apiguardian-api.version>
         <archunit.version>1.4.1</archunit.version>
         <aspectj.version>1.9.25.1</aspectj.version> <!-- Keep in sync with boot -->
         <aspectj-tools.version>1.9.25.1</aspectj-tools.version>
         <feign.version>13.6</feign.version> <!-- Keep in sync with spring-cloud-openfeign-dependencies -->
-        <jolokia-core.version>1.7.2</jolokia-core.version>
+        <jolokia-support-springboot.version>2.6.0</jolokia-support-springboot.version>
         <logstash-logback-encoder.version>8.1</logstash-logback-encoder.version>
         <logback.version>1.5.34</logback.version> <!-- Keep in sync with boot -->
         <loki-logback-appender.version>2.0.0</loki-logback-appender.version>
@@ -1251,8 +1251,8 @@
             </dependency>
             <dependency>
                 <groupId>org.jolokia</groupId>
-                <artifactId>jolokia-core</artifactId>
-                <version>${jolokia-core.version}</version>
+                <artifactId>jolokia-support-springboot</artifactId>
+                <version>${jolokia-support-springboot.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.mapstruct</groupId>
