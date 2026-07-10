@@ -805,6 +805,26 @@
                     <groupId>com.mysema.maven</groupId>
                     <artifactId>apt-maven-plugin</artifactId>
                     <version>${apt-maven-plugin.version}</version>
+                    <configuration>
+                        <processors>
+                            <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+                        </processors>
+                    </configuration>
+                    <dependencies>
+                        <!-- The jakarta classifier is required, the classifier-less artifacts target javax.persistence -->
+                        <dependency>
+                            <groupId>com.querydsl</groupId>
+                            <artifactId>querydsl-apt</artifactId>
+                            <version>${querydsl.version}</version>
+                            <classifier>jakarta</classifier>
+                        </dependency>
+                        <dependency>
+                            <groupId>com.querydsl</groupId>
+                            <artifactId>querydsl-jpa</artifactId>
+                            <version>${querydsl.version}</version>
+                            <classifier>apt</classifier>
+                        </dependency>
+                    </dependencies>
                 </plugin>
                 <plugin>
                     <groupId>com.google.cloud.tools</groupId>
@@ -1148,6 +1168,7 @@
                 <groupId>com.querydsl</groupId>
                 <artifactId>querydsl-apt</artifactId>
                 <version>${querydsl.version}</version>
+                <classifier>jakarta</classifier>
             </dependency>
             <dependency>
                 <groupId>com.querydsl</groupId>
@@ -1163,6 +1184,13 @@
                 <groupId>com.querydsl</groupId>
                 <artifactId>querydsl-jpa</artifactId>
                 <version>${querydsl.version}</version>
+                <classifier>jakarta</classifier>
+            </dependency>
+            <dependency>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-jpa</artifactId>
+                <version>${querydsl.version}</version>
+                <classifier>apt</classifier>
             </dependency>
             <dependency>
                 <groupId>com.tngtech.archunit</groupId>
