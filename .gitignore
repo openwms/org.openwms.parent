@@ -17,6 +17,7 @@ libs/
 **/javadoc.sh
 **/options
 *.class
+CLAUDE.md
  
 # Package Files #
 *.jar
